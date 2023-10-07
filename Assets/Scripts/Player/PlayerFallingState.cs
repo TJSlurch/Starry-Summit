@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class PlayerRunState : PlayerBaseState
+public class PlayerFallingState : PlayerBaseState
 {
 
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Run State");
+        Debug.Log("Entering Falling State");
     }
 
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
-        if (Mathf.Abs(player.horizontalInput) < Mathf.Epsilon)
+        if (player.rb.velocity.y == 0)
         {
             player.SwitchState(player.IdleState);
         }
@@ -24,8 +24,3 @@ public class PlayerRunState : PlayerBaseState
         player.rb.velocity = movement;
     }
 }
-
-
-
-
-
