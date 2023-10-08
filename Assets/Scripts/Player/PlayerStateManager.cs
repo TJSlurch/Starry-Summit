@@ -12,7 +12,7 @@ public class PlayerStateManager : MonoBehaviour
     public float x;
     public float y;
 
-    // instantiating an instance of each state
+    // creating an instance of each state
     PlayerBaseState currentState;
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerRunState RunState = new PlayerRunState();
@@ -32,8 +32,9 @@ public class PlayerStateManager : MonoBehaviour
         // updating the current state's script every frame
         currentState.UpdateState(this);
         currentState.UpdatePhysics(this);
-        horizontalInput = Input.GetAxis("Horizontal");
 
+        //detecting horizontal input and character's velocity
+        horizontalInput = Input.GetAxis("Horizontal");
         x = rb.velocity.x;
         y = rb.velocity.y;
     }

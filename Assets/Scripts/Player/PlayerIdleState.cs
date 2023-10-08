@@ -27,11 +27,6 @@ public class PlayerIdleState : PlayerBaseState
         {
             player.SwitchState(player.RunState);
         }
-        /*if (player.horizontalInput) != 0)
-        {
-            player.SwitchState(player.RunState);
-        }
-        */
     }
 
     public override void UpdatePhysics(PlayerStateManager player)
