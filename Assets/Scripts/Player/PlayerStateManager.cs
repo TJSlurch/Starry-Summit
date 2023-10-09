@@ -6,11 +6,11 @@ public class PlayerStateManager : MonoBehaviour
 {
     public int speed = 5;
     public int jumpForce = 5;
-    public float horizontalInput;
     public Rigidbody2D rb;
 
-    public float x;
-    public float y;
+    private float horizontalInput;
+    private float xVel;
+    private float yVel;
 
     // creating an instance of each state
     PlayerBaseState currentState;
@@ -35,8 +35,8 @@ public class PlayerStateManager : MonoBehaviour
 
         //detecting horizontal input and character's velocity
         horizontalInput = Input.GetAxis("Horizontal");
-        x = rb.velocity.x;
-        y = rb.velocity.y;
+        xVel = rb.velocity.x;
+        yVel = rb.velocity.y;
     }
 
     // subroutine which changes the current state
@@ -44,6 +44,20 @@ public class PlayerStateManager : MonoBehaviour
     {
         currentState = state;
         state.EnterState(this);
+    }
+
+    // accessor methods for the private variables
+    public float getX()
+    {
+        return xVel;
+    }
+    public float getY()
+    {
+        return yVel;
+    }
+    public float getInput()
+    {
+        return horizontalInput;
     }
 }
 

@@ -7,20 +7,25 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Jump State");
+        player.rb.velocity = new Vector2(player.getX(), player.jumpForce);
     }
 
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
-        if (player.rb.velocity.y <= 0)
+        // detects if vertical velocity is negative (downwards)
+        if (player.getY() < -0.1)
         {
+            // switches player to falling state
             player.SwitchState(player.FallingState);
         }
     }
 
+    // what happens every frame whilst this state is active
     public override void UpdatePhysics(PlayerStateManager player)
     {
-        Vector2 movement = new Vector2(player.horizontalInput * player.speed, player.rb.velocity.y);
+        // detects horizontal input and uses it to change player velocity
+        Vector2 movement = new Vector2(player.getInput() * player.speed, player.getY());
         player.rb.velocity = movement;
     }
 }

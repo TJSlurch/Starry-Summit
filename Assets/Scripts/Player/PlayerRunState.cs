@@ -12,15 +12,33 @@ public class PlayerRunState : PlayerBaseState
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
-        if (Mathf.Abs(player.horizontalInput) < Mathf.Epsilon)
+        // detects if horizontal input is zero
+        if (Mathf.Abs(player.getX()) < Mathf.Epsilon)
         {
+            // switches to idle state
             player.SwitchState(player.IdleState);
+        }
+
+        // detects if vertical velocity is negative (downwards)
+        if (player.rb.velocity.y < -0.01)
+        {
+            // switches player to falling state
+            player.SwitchState(player.FallingState);
+        }
+
+        // detects space bar being pressed
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // switches to jump state
+            player.SwitchState(player.JumpState);
         }
     }
 
+    // what happens every frame whilst this state is active
     public override void UpdatePhysics(PlayerStateManager player)
     {
-        Vector2 movement = new Vector2(player.horizontalInput * player.speed, player.rb.velocity.y);
+        // detects horizontal input and uses it to change player velocity
+        Vector2 movement = new Vector2(player.getInput() * player.speed, player.getY());
         player.rb.velocity = movement;
     }
 }
