@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    public int speed = 5;
-    public int jumpForce = 5;
+    // declare variables and declare initial values
+    public float speed = 5f;
+    public float jumpForce = 5f;
     public Rigidbody2D rb;
-
     private float horizontalInput;
-    private float xVel;
-    private float yVel;
+    public bool jumpRequest = false;
 
     // creating an instance of each state
     PlayerBaseState currentState;
@@ -33,10 +32,22 @@ public class PlayerStateManager : MonoBehaviour
         currentState.UpdateState(this);
         currentState.UpdatePhysics(this);
 
-        //detecting horizontal input and character's velocity
+        // detecting horizontal input
         horizontalInput = Input.GetAxis("Horizontal");
-        xVel = rb.velocity.x;
-        yVel = rb.velocity.y;
+
+        // detecing a space bar input
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jumpRequest = true;
+            StartCoroutine(ResetJump());
+        }
+    }
+
+    // sets the jump request boolean to false after 0.5s
+    private IEnumerator ResetJump()
+    {
+        yield return new WaitForSeconds(0.3f);
+        jumpRequest = false;
     }
 
     // subroutine which changes the current state
@@ -46,15 +57,6 @@ public class PlayerStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    // accessor methods for the private variables
-    public float getX()
-    {
-        return xVel;
-    }
-    public float getY()
-    {
-        return yVel;
-    }
     public float getInput()
     {
         return horizontalInput;

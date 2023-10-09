@@ -12,15 +12,16 @@ public class PlayerIdleState : PlayerBaseState
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
-        // detects space bar being pressed
-        if(Input.GetKeyDown(KeyCode.Space))
+        // detects if a jump request is active
+        if (player.jumpRequest)
         {
             // switches to jump state
             player.SwitchState(player.JumpState);
+            player.jumpRequest = false;
         }
 
         // detects if vertical velocity is negative (downwards)
-        if(player.getY() < -0.01)
+        if (player.rb.velocity.y < -0.01)
         {
             // switches player to falling state
             player.SwitchState(player.FallingState);

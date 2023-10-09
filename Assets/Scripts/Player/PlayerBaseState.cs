@@ -7,10 +7,3 @@ public abstract class PlayerBaseState
     public abstract void UpdateState(PlayerStateManager player);
     public abstract void UpdatePhysics(PlayerStateManager player);
 }
-
-
-
-
-
-
-

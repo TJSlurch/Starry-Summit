@@ -13,7 +13,7 @@ public class PlayerRunState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if horizontal input is zero
-        if (Mathf.Abs(player.getX()) < Mathf.Epsilon)
+        if (Mathf.Abs(player.rb.velocity.x) < Mathf.Epsilon)
         {
             // switches to idle state
             player.SwitchState(player.IdleState);
@@ -26,11 +26,12 @@ public class PlayerRunState : PlayerBaseState
             player.SwitchState(player.FallingState);
         }
 
-        // detects space bar being pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        // detects if a jump request is active
+        if (player.jumpRequest)
         {
             // switches to jump state
             player.SwitchState(player.JumpState);
+            player.jumpRequest = false;
         }
     }
 
@@ -38,7 +39,7 @@ public class PlayerRunState : PlayerBaseState
     public override void UpdatePhysics(PlayerStateManager player)
     {
         // detects horizontal input and uses it to change player velocity
-        Vector2 movement = new Vector2(player.getInput() * player.speed, player.getY());
+        Vector2 movement = new Vector2(player.getInput() * player.speed, player.rb.velocity.y);
         player.rb.velocity = movement;
     }
 }
