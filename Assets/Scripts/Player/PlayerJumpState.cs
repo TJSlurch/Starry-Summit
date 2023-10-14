@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerBaseState
 {
-    private float lowJumpMultiplier = 3f;
+    private float lowJumpMultiplier = 3.5f;
     private float regularGravity = 2f;
     private float weightlessGravity = 1f;
 
@@ -10,14 +10,15 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Jump State");
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce);
+        // initiates a jump as soon as this state is switched to
+        player.setVelocity(new Vector2(player.getX(), player.getJumpForce()));
     }
 
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if vertical velocity is negative (downwards)
-        if (player.rb.velocity.y < -0.1)
+        if (player.getY() < -0.1)
         {
             // switches player to falling state
             player.SwitchState(player.FallingState);
@@ -28,23 +29,22 @@ public class PlayerJumpState : PlayerBaseState
     public override void UpdatePhysics(PlayerStateManager player)
     {
         // at the peak of the player's jump, they experience reduced gravity
-        if (player.rb.velocity.y < 1)
+        if (player.getY() < 1)
         {
-            player.rb.gravityScale = weightlessGravity;
+            player.setGravity(weightlessGravity);
         }
         // if space is held, gravity remains constant for a normal jump
         else if (Input.GetKey(KeyCode.Space))
         {
-            player.rb.gravityScale = regularGravity;
+            player.setGravity(regularGravity);
         }
         // if space is released, gravity is increased for a shorter jump
         else
         {
-            player.rb.gravityScale = lowJumpMultiplier;
+            player.setGravity(lowJumpMultiplier);
         }
 
         // detects horizontal input and uses it to change player velocity
-        Vector2 movement = new Vector2(player.getInput() * player.speed, player.rb.velocity.y);
-        player.rb.velocity = movement;
+        player.setVelocity(new Vector2(player.getInput() * player.getSpeed(), player.getY()));
     }
 }

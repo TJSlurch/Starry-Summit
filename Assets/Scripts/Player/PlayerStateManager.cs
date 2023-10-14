@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerStateManager : MonoBehaviour
 {
     // declare variables and declare initial values
-    public float speed = 5f;
-    public float jumpForce = 5f;
-    public Rigidbody2D rb;
+    [SerializeField] private float speed = 8f;
+    [SerializeField] private float jumpForce = 12f;
     private float horizontalInput;
-    public bool jumpRequest = false;
+    private bool jumpRequest = false;
+    private Rigidbody2D rb;
 
     // creating an instance of each state
     PlayerBaseState currentState;
@@ -20,15 +20,15 @@ public class PlayerStateManager : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         // setting the state which the player starts in
         currentState = IdleState;
         currentState.EnterState(this);
-        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // updating the current state's script every frame
+        // updating the update methods for the current state's script
         currentState.UpdateState(this);
         currentState.UpdatePhysics(this);
 
@@ -43,7 +43,7 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
-    // sets the jump request boolean to false after 0.5s
+    // cooroutine sets the jump request boolean to false after 0.5s
     private IEnumerator ResetJump()
     {
         yield return new WaitForSeconds(0.3f);
@@ -57,10 +57,44 @@ public class PlayerStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
+    // accessor methods for the private attributes
     public float getInput()
     {
         return horizontalInput;
     }
-}
+    public float getSpeed()
+    {
+        return speed;
+    }
+    public float getJumpForce()
+    {
+        return jumpForce;
+    }
+    public float getX()
+    {
+        return rb.velocity.x;
+    }
+    public float getY()
+    {
+        return rb.velocity.y;
+    }
+    public bool getJumpRequest()
+    {
+        return jumpRequest;
+    }
 
+    // mutator methods for the private attributes
+    public void setVelocity(Vector2 velocity)
+    {
+        rb.velocity = velocity;
+    }
+    public void setGravity(float multiplier)
+    {
+        rb.gravityScale = multiplier;
+    }
+    public void setJumpRequest(bool value)
+    {
+        jumpRequest = value;
+    }
+}
 

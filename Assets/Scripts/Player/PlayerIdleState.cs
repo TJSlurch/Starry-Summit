@@ -6,6 +6,8 @@ public class PlayerIdleState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
+        // sets velocity to 0 as soon as no input is detected
+        player.setVelocity(new Vector2(0, player.getY()));
         Debug.Log("Entering Idle State");
     }
 
@@ -13,15 +15,15 @@ public class PlayerIdleState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if a jump request is active
-        if (player.jumpRequest)
+        if (player.getJumpRequest())
         {
             // switches to jump state
             player.SwitchState(player.JumpState);
-            player.jumpRequest = false;
+            player.setJumpRequest(false);
         }
 
         // detects if vertical velocity is negative (downwards)
-        if (player.rb.velocity.y < -0.01)
+        if (player.getY() < -0.01)
         {
             // switches player to falling state
             player.SwitchState(player.FallingState);
@@ -35,7 +37,7 @@ public class PlayerIdleState : PlayerBaseState
         }
     }
 
-    // no movement occurs during idle state so physics don't need updating
+    // no movement occurs during idle state, so physics don't need updating
     public override void UpdatePhysics(PlayerStateManager player)
     {
 

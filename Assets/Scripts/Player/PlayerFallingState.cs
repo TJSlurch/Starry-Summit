@@ -15,14 +15,14 @@ public class PlayerFallingState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if vertical velocity is zero (no vertical movement)
-        if (Mathf.Abs(player.rb.velocity.y) < 0.01)
+        if (Mathf.Abs(player.getY()) < 0.01)
         {
             // switches to idle state
             player.SwitchState(player.IdleState);
         }
 
         // detects if horizontal input isn't zero
-        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && Mathf.Abs(player.rb.velocity.y) < 0.01)
+        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && Mathf.Abs(player.getY()) < 0.01)
         {
             // switches player to run state
             player.SwitchState(player.RunState);
@@ -33,18 +33,17 @@ public class PlayerFallingState : PlayerBaseState
     public override void UpdatePhysics(PlayerStateManager player)
     {
         // at the peak of the player's jump, they experience reduced gravity
-        if (player.rb.velocity.y > -1)
+        if (player.getY() > -1)
         {
-            player.rb.gravityScale = weightlessGravity;
+            player.setGravity(weightlessGravity);
         }
         // gravity is then increased to a maximum as the jump ends
         else
         {
-            player.rb.gravityScale = fallMultiplier;
+            player.setGravity(fallMultiplier);
         }
       
         // detects horizontal input and uses it to change player velocity
-        Vector2 movement = new Vector2(player.getInput() * player.speed, player.rb.velocity.y);
-        player.rb.velocity = movement;
+        player.setVelocity(new Vector2(player.getInput() * player.getSpeed(), player.getY()));
     }
 }
