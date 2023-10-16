@@ -35,6 +35,24 @@ public class PlayerIdleState : PlayerBaseState
             // switches player to run state
             player.SwitchState(player.RunState);
         }
+
+
+
+
+
+
+
+        if(Input.GetAxis("dashY") > Mathf.Epsilon || Input.GetAxis("dashX") > Mathf.Epsilon)
+        {
+            player.SwitchState(player.DashState);
+        }
+
+
+
+
+
+
+
     }
 
     // no movement occurs during idle state, so physics don't need updating

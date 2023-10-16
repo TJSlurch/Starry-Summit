@@ -17,6 +17,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerRunState RunState = new PlayerRunState();
     public PlayerJumpState JumpState = new PlayerJumpState();
     public PlayerFallingState FallingState = new PlayerFallingState();
+    public PlayerDashState DashState = new PlayerDashState();
 
     void Start()
     {
