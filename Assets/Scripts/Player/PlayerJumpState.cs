@@ -23,6 +23,21 @@ public class PlayerJumpState : PlayerBaseState
             // switches player to falling state
             player.SwitchState(player.FallingState);
         }
+
+
+
+
+        if (player.getCanDash() == true)
+        {
+            if (Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
+            {
+                player.SwitchState(player.DashState);
+            }
+        }
+
+
+
+
     }
 
     // what happens every frame whilst this state is active
@@ -43,7 +58,6 @@ public class PlayerJumpState : PlayerBaseState
         {
             player.setGravity(lowJumpMultiplier);
         }
-
         // detects horizontal input and uses it to change player velocity
         player.setVelocity(new Vector2(player.getInput() * player.getSpeed(), player.getY()));
     }

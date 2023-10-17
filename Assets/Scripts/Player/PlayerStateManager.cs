@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
+    public float SPEED = 20f;
+    public float TIME = 0.1f;
+    //public float DRAG = 10f;
+
+    [SerializeField] private bool canDash;
+
     // declare variables and declare initial values
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpForce = 12f;
@@ -58,6 +64,8 @@ public class PlayerStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
+
+
     // accessor methods for the private attributes
     public float getInput()
     {
@@ -83,6 +91,10 @@ public class PlayerStateManager : MonoBehaviour
     {
         return jumpRequest;
     }
+    public bool getCanDash()
+    {
+        return canDash;
+    }
 
     // mutator methods for the private attributes
     public void setVelocity(Vector2 velocity)
@@ -97,5 +109,18 @@ public class PlayerStateManager : MonoBehaviour
     {
         jumpRequest = value;
     }
+    public void setCanDash(bool value)
+    {
+        canDash = value;
+    }
+    public void addForce(Vector2 force)
+    {
+        rb.AddForce(force);
+    }
+
+    //public void setLinearDrag(float drag)
+    //{
+    //rb.drag = drag;
+    //}
 }
 

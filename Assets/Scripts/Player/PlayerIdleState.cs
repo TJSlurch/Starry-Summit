@@ -6,9 +6,13 @@ public class PlayerIdleState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
+        Debug.Log("Entering Idle State");
+
         // sets velocity to 0 as soon as no input is detected
         player.setVelocity(new Vector2(0, player.getY()));
-        Debug.Log("Entering Idle State");
+
+        //refreshes dash ability
+        player.setCanDash(true);
     }
 
     // what happens every frame whilst this state is active
@@ -42,7 +46,7 @@ public class PlayerIdleState : PlayerBaseState
 
 
 
-        if(Input.GetAxis("dashY") > Mathf.Epsilon || Input.GetAxis("dashX") > Mathf.Epsilon)
+        if(Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
         {
             player.SwitchState(player.DashState);
         }

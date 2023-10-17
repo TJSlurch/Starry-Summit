@@ -7,6 +7,8 @@ public class PlayerRunState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Run State");
+        //refreshes dash ability
+        player.setCanDash(true);
     }
 
     // what happens every frame whilst this state is active
@@ -33,6 +35,20 @@ public class PlayerRunState : PlayerBaseState
             player.SwitchState(player.JumpState);
             player.setJumpRequest(false);
         }
+
+
+
+       
+
+        if (Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
+        {
+            player.SwitchState(player.DashState);
+        }
+
+
+
+
+
     }
 
     // what happens every frame whilst this state is active

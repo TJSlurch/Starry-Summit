@@ -27,6 +27,20 @@ public class PlayerFallingState : PlayerBaseState
             // switches player to run state
             player.SwitchState(player.RunState);
         }
+
+
+        if(player.getCanDash() == true)
+        {
+            if (Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
+            {
+                player.SwitchState(player.DashState);
+            }
+        }
+
+
+
+
+
     }
 
     // what happens every frame whilst this state is active
