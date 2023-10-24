@@ -24,20 +24,11 @@ public class PlayerJumpState : PlayerBaseState
             player.SwitchState(player.FallingState);
         }
 
-
-
-
-        if (player.getCanDash() == true)
+        // initiates a dash if arrow keys are pressed whilst a dash is possible
+        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
         {
-            if (Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
-            {
-                player.SwitchState(player.DashState);
-            }
+            player.SwitchState(player.DashState);
         }
-
-
-
-
     }
 
     // what happens every frame whilst this state is active

@@ -3,49 +3,60 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerBaseState
 {
-    private float dashSpeed = 3f;
-    private float dashTime = 0.2f;
+    private float dashSpeed = 30f;
+    private float dashTime = 0.15f;
 
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Dash State");
         player.setCanDash(false);
-        //player.setVelocity(new Vector2(Input.GetAxis("dashX") * dashSpeed, Input.GetAxis("dashY") * dashSpeed));
-        //player.setVelocity(new Vector2(Input.GetAxis("dashX") * player.SPEED, Input.GetAxis("dashY") * player.SPEED));
-        player.addForce(new Vector2(Input.GetAxis("dashX") * player.SPEED, Input.GetAxis("dashY") * player.SPEED));
-        player.setGravity(0f);
-        //player.setLinearDrag(player.DRAG);
 
-        //player.StartCoroutine(endDash(dashTime,player));
-        player.StartCoroutine(endDash(player.TIME, player));
+        // sets gravity to zero and launches player in the direction inputted
+        player.setGravity(0f);
+        player.setVelocity(new Vector2(Input.GetAxis("dashX"), Input.GetAxis("dashY")) * dashSpeed);
+
+        // starts the process of ending the dash
+        player.StartCoroutine(endDash(dashTime, player));
     }
 
-    // coroutine which changes gravity back after the desired time
+    // coroutine which resets the player's movement
     public IEnumerator endDash(float time, PlayerStateManager player)
     {
+        // waits for the length of the dash
         yield return new WaitForSeconds(time);
-        player.setGravity(5f);
-        //player.setLinearDrag(0f);
 
-        if (Mathf.Abs(player.getY()) > 0.01)
+        // resets gravity
+        player.setGravity(5f);
+        // resets vertical velocity if going upwards
+        if(player.getY() > 0.01)
+        {
+            player.setVelocity(new Vector2(player.getX(), 0));
+        }
+
+        // detects if touching ground with input
+        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && player.getTouchingDown())
+        {
+            // switches player to run state
+            player.SwitchState(player.RunState);
+            // waits briefly to prevent dash spamming
+            yield return new WaitForSeconds(0.25f);
+            player.setCanDash(true);
+        }
+        else if(player.getTouchingDown())
+        {
+            // switches to idle state
+            player.SwitchState(player.IdleState);
+            // waits briefly to prevent dash spamming
+            yield return new WaitForSeconds(0.25f);
+            player.setCanDash(true);
+        }
+        else
         {
             // switches player to falling state
             player.SwitchState(player.FallingState);
         }
-        // detects if horizontal input isn't zero
-        else if (Mathf.Abs(player.getInput()) > Mathf.Epsilon)
-        {
-            // switches player to run state
-            player.SwitchState(player.RunState);
-        }
-        else
-        {
-            // switches to idle state
-            player.SwitchState(player.IdleState);
-        }
     }
-
 
 
     // what happens every frame whilst this state is active
@@ -60,3 +71,5 @@ public class PlayerDashState : PlayerBaseState
 
     }
 }
+
+

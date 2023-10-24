@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerFallingState : PlayerBaseState
 {
@@ -14,33 +15,30 @@ public class PlayerFallingState : PlayerBaseState
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
-        // detects if vertical velocity is zero (no vertical movement)
-        if (Mathf.Abs(player.getY()) < 0.01)
-        {
-            // switches to idle state
-            player.SwitchState(player.IdleState);
-        }
-
         // detects if horizontal input isn't zero
-        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && Mathf.Abs(player.getY()) < 0.01)
+        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && player.getTouchingDown())
         {
             // switches player to run state
             player.SwitchState(player.RunState);
+            // waits briefly to prevent dash spam
+            player.StartCoroutine(waitSeconds(0.25f, player));
+            player.setCanDash(true);
         }
-
-
-        if(player.getCanDash() == true)
+        // detects if player is touching the ground
+        else if (player.getTouchingDown())
         {
-            if (Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
-            {
-                player.SwitchState(player.DashState);
-            }
+            // switches to idle state
+            player.SwitchState(player.IdleState);
+            // waits briefly to prevent dash spam
+            player.StartCoroutine(waitSeconds(0.25f, player));
+            player.setCanDash(true);
         }
 
-
-
-
-
+        // initiates a dash if arrow keys are pressed whilst a dash is possible
+        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
+        {
+            player.SwitchState(player.DashState);
+        }
     }
 
     // what happens every frame whilst this state is active
@@ -59,5 +57,11 @@ public class PlayerFallingState : PlayerBaseState
       
         // detects horizontal input and uses it to change player velocity
         player.setVelocity(new Vector2(player.getInput() * player.getSpeed(), player.getY()));
+    }
+
+    // Wait seconds coroutine which prevents dashing from being enabled immediately
+    public IEnumerator waitSeconds(float time, PlayerStateManager player)
+    {
+        yield return new WaitForSeconds(0.25f);
     }
 }

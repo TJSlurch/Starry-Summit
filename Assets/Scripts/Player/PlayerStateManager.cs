@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    public float SPEED = 20f;
-    public float TIME = 0.1f;
-    //public float DRAG = 10f;
-
-    [SerializeField] private bool canDash;
-
     // declare variables and declare initial values
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpForce = 12f;
     private float horizontalInput;
     private bool jumpRequest = false;
+    private bool canDash = true;
+
+    // define the components which are to be used
     private Rigidbody2D rb;
+    [SerializeField] private GameObject RightCollision;
+    [SerializeField] private GameObject LeftCollision;
+    [SerializeField] private GameObject DownCollision;
+    private BoxCollider2D rbRight;
+    private BoxCollider2D rbLeft;
+    private BoxCollider2D rbDown;
 
     // creating an instance of each state
     PlayerBaseState currentState;
@@ -27,7 +30,12 @@ public class PlayerStateManager : MonoBehaviour
 
     void Start()
     {
+        // using getComponent to retreive the components
         rb = GetComponent<Rigidbody2D>();
+        rbRight = RightCollision.GetComponent<BoxCollider2D>();
+        rbLeft = LeftCollision.GetComponent<BoxCollider2D>();
+        rbDown = DownCollision.GetComponent<BoxCollider2D>();
+
         // setting the state which the player starts in
         currentState = IdleState;
         currentState.EnterState(this);
@@ -96,6 +104,19 @@ public class PlayerStateManager : MonoBehaviour
         return canDash;
     }
 
+    public bool getTouchingRight()
+    {
+        return rbRight.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    }
+    public bool getTouchingLeft()
+    {
+        return rbLeft.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    }
+    public bool getTouchingDown()
+    {
+        return rbDown.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    }
+
     // mutator methods for the private attributes
     public void setVelocity(Vector2 velocity)
     {
@@ -113,14 +134,5 @@ public class PlayerStateManager : MonoBehaviour
     {
         canDash = value;
     }
-    public void addForce(Vector2 force)
-    {
-        rb.AddForce(force);
-    }
-
-    //public void setLinearDrag(float drag)
-    //{
-    //rb.drag = drag;
-    //}
 }
 

@@ -10,9 +10,6 @@ public class PlayerIdleState : PlayerBaseState
 
         // sets velocity to 0 as soon as no input is detected
         player.setVelocity(new Vector2(0, player.getY()));
-
-        //refreshes dash ability
-        player.setCanDash(true);
     }
 
     // what happens every frame whilst this state is active
@@ -34,29 +31,17 @@ public class PlayerIdleState : PlayerBaseState
         }
 
         // detects if horizontal input isn't zero
-        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon)
+        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && player.getTouchingDown())
         {
             // switches player to run state
             player.SwitchState(player.RunState);
         }
 
-
-
-
-
-
-
-        if(Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
+        // initiates a dash if arrow keys are pressed whilst a dash is possible
+        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
         {
             player.SwitchState(player.DashState);
         }
-
-
-
-
-
-
-
     }
 
     // no movement occurs during idle state, so physics don't need updating

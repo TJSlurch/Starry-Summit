@@ -7,15 +7,13 @@ public class PlayerRunState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Run State");
-        //refreshes dash ability
-        player.setCanDash(true);
     }
 
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
         // detects for no horizontal input
-        if (Mathf.Abs(player.getInput()) < Mathf.Epsilon)
+        if (Mathf.Abs(player.getInput()) < Mathf.Epsilon && player.getTouchingDown())
         {
             // switches to idle state
             player.SwitchState(player.IdleState);
@@ -36,19 +34,11 @@ public class PlayerRunState : PlayerBaseState
             player.setJumpRequest(false);
         }
 
-
-
-       
-
-        if (Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon)
+        // initiates a dash if arrow keys are pressed whilst a dash is possible
+        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
         {
             player.SwitchState(player.DashState);
         }
-
-
-
-
-
     }
 
     // what happens every frame whilst this state is active
