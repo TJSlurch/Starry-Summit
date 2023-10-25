@@ -16,7 +16,7 @@ public class PlayerFallingState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if horizontal input isn't zero
-        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && player.getTouchingDown())
+        if (Mathf.Abs(player.getX()) > Mathf.Epsilon && player.getTouchingDown())
         {
             // switches player to run state
             player.SwitchState(player.RunState);

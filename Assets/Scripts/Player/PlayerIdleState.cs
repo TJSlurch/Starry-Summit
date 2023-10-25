@@ -24,7 +24,7 @@ public class PlayerIdleState : PlayerBaseState
         }
 
         // detects if vertical velocity is negative (downwards)
-        if (player.getY() < -0.01)
+        if (player.getY() < -0.01 && !player.getTouchingDown())
         {
             // switches player to falling state
             player.SwitchState(player.FallingState);

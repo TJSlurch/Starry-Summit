@@ -13,15 +13,15 @@ public class PlayerStateManager : MonoBehaviour
 
     // define the components which are to be used
     private Rigidbody2D rb;
-    [SerializeField] private GameObject RightCollision;
-    [SerializeField] private GameObject LeftCollision;
-    [SerializeField] private GameObject DownCollision;
     private BoxCollider2D rbRight;
     private BoxCollider2D rbLeft;
     private BoxCollider2D rbDown;
+    [SerializeField] private GameObject RightCollision;
+    [SerializeField] private GameObject LeftCollision;
+    [SerializeField] private GameObject DownCollision;
 
     // creating an instance of each state
-    PlayerBaseState currentState;
+    private PlayerBaseState currentState;
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerRunState RunState = new PlayerRunState();
     public PlayerJumpState JumpState = new PlayerJumpState();
@@ -55,10 +55,10 @@ public class PlayerStateManager : MonoBehaviour
         {
             jumpRequest = true;
             StartCoroutine(ResetJump());
-        }
+        }       
     }
 
-    // cooroutine sets the jump request boolean to false after 0.5s
+    // cooroutine sets the jump request boolean to false after 0.3s
     private IEnumerator ResetJump()
     {
         yield return new WaitForSeconds(0.3f);
@@ -71,9 +71,6 @@ public class PlayerStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
-
-
-
     // accessor methods for the private attributes
     public float getInput()
     {
