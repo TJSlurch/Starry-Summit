@@ -13,7 +13,7 @@ public class PlayerRunState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects for no horizontal input
-        if (Mathf.Abs(player.getInput()) < Mathf.Epsilon && player.getTouchingDown())
+        if (Mathf.Abs(player.getInputX()) < Mathf.Epsilon && player.getTouchingDown())
         {
             // switches to idle state
             player.SwitchState(player.IdleState);
@@ -39,13 +39,20 @@ public class PlayerRunState : PlayerBaseState
         {
             player.SwitchState(player.DashState);
         }
+
+        // detects if wall grab button is pressed whilst next to a wall
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.SwitchState(player.WallGrabState);
+        }
+
     }
 
     // what happens every frame whilst this state is active
     public override void UpdatePhysics(PlayerStateManager player)
     {
         // detects horizontal input and uses it to change player velocity
-        player.setVelocity(new Vector2(player.getInput() * player.getSpeed(), player.getY()));
+        player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
     }
 }
 

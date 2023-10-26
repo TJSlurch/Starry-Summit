@@ -7,7 +7,7 @@ public class PlayerStateManager : MonoBehaviour
     // declare variables and declare initial values
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpForce = 12f;
-    private float horizontalInput;
+    [SerializeField] private float climbSpeed = 3f;
     private bool jumpRequest = false;
     private bool canDash = true;
 
@@ -27,6 +27,9 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerJumpState JumpState = new PlayerJumpState();
     public PlayerFallingState FallingState = new PlayerFallingState();
     public PlayerDashState DashState = new PlayerDashState();
+    public PlayerWallGrabState WallGrabState = new PlayerWallGrabState();
+    public PlayerWallClimbState WallClimbState = new PlayerWallClimbState();
+    public PlayerWallJumpState WallJumpState = new PlayerWallJumpState();
 
     void Start()
     {
@@ -46,9 +49,6 @@ public class PlayerStateManager : MonoBehaviour
         // updating the update methods for the current state's script
         currentState.UpdateState(this);
         currentState.UpdatePhysics(this);
-
-        // detecting horizontal input
-        horizontalInput = Input.GetAxis("Horizontal");
 
         // detecing a space bar input
         if (Input.GetKeyDown(KeyCode.Space))
@@ -72,9 +72,13 @@ public class PlayerStateManager : MonoBehaviour
         state.EnterState(this);
     }
     // accessor methods for the private attributes
-    public float getInput()
+    public float getInputX()
     {
-        return horizontalInput;
+    return Input.GetAxis("Horizontal");
+    }
+    public float getInputY()
+    {
+        return Input.GetAxis("Vertical");
     }
     public float getSpeed()
     {
@@ -83,6 +87,10 @@ public class PlayerStateManager : MonoBehaviour
     public float getJumpForce()
     {
         return jumpForce;
+    }
+    public float getClimbSpeed()
+    {
+        return climbSpeed;
     }
     public float getX()
     {

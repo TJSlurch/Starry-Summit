@@ -3068,6 +3068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   jumpForce: 12
+  climbSpeed: 3
   RightCollision: {fileID: 206696602}
   LeftCollision: {fileID: 2114582318}
   DownCollision: {fileID: 9945572}

@@ -31,7 +31,7 @@ public class PlayerIdleState : PlayerBaseState
         }
 
         // detects if horizontal input isn't zero
-        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && player.getTouchingDown())
+        if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
         {
             // switches player to run state
             player.SwitchState(player.RunState);
@@ -41,6 +41,12 @@ public class PlayerIdleState : PlayerBaseState
         if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
         {
             player.SwitchState(player.DashState);
+        }
+
+        // detects if wall grab button is pressed whilst next to a wall
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.SwitchState(player.WallGrabState);
         }
     }
 

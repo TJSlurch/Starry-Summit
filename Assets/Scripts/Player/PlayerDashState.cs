@@ -63,7 +63,7 @@ public class PlayerDashState : PlayerBaseState
         }
 
         // detects if touching ground with input
-        if (Mathf.Abs(player.getInput()) > Mathf.Epsilon && player.getTouchingDown())
+        if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
         {
             // switches player to run state
             player.SwitchState(player.RunState);
@@ -89,7 +89,16 @@ public class PlayerDashState : PlayerBaseState
     // what happens every frame whilst this state is active
     public override void UpdateState(PlayerStateManager player)
     {
-
+        // detects if wall grab button is pressed whilst dashing into a wall
+        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.SwitchState(player.WallGrabState);
+        }
+        // detects if wall grab button is pressed whilst dashing into a wall
+        if (player.getTouchingRight() && player.getX() > 0 && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.SwitchState(player.WallGrabState);
+        }
     }
 
     // no movement occurs during idle state, so physics don't need updating
