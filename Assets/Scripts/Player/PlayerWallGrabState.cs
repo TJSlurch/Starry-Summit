@@ -43,6 +43,14 @@ public class PlayerWallGrabState : PlayerBaseState
         {
             player.SwitchState(player.WallClimbState);
         }
+
+        // detects if a jump request is active
+        if (player.getJumpRequest())
+        {
+            // switches to wall jump state
+            player.SwitchState(player.WallJumpState);
+            player.setJumpRequest(false);
+        }
     }
 
     public override void UpdatePhysics(PlayerStateManager player)

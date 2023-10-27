@@ -60,9 +60,13 @@ public class PlayerFallingState : PlayerBaseState
         {
             player.setGravity(fallMultiplier);
         }
-      
+
+
         // detects horizontal input and uses it to change player velocity
-        player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
+        if (Mathf.Abs(player.getInputX()) > 0)
+        {
+            player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
+        }
     }
 
     // Wait seconds coroutine which prevents dashing from being enabled immediately

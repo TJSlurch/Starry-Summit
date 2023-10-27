@@ -23,7 +23,6 @@ public class PlayerDashState : PlayerBaseState
         // starts the coroutine for the dash start
         player.StartCoroutine(StartDash(inputTime, player));
 
-
     }
 
     // coroutine which performs the dash

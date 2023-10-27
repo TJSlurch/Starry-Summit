@@ -11,6 +11,8 @@ public class PlayerStateManager : MonoBehaviour
     private bool jumpRequest = false;
     private bool canDash = true;
 
+                                                                                                        public bool wall;
+
     // define the components which are to be used
     private Rigidbody2D rb;
     private BoxCollider2D rbRight;
@@ -56,6 +58,15 @@ public class PlayerStateManager : MonoBehaviour
             jumpRequest = true;
             StartCoroutine(ResetJump());
         }       
+
+        if(getTouchingLeft() || getTouchingRight())
+        {
+            wall = true;
+        }
+        else
+        {
+            wall = false;
+        }
     }
 
     // cooroutine sets the jump request boolean to false after 0.3s
@@ -71,6 +82,7 @@ public class PlayerStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
+
     // accessor methods for the private attributes
     public float getInputX()
     {
