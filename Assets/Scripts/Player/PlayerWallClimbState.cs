@@ -11,7 +11,7 @@ public class PlayerWallClimbState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // when shift is released, a new state is entered
-        if (!Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetAxis("Wall Hold") == 0)
         {
             // choosing which state to enter
             if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
@@ -32,7 +32,7 @@ public class PlayerWallClimbState : PlayerBaseState
         }
 
         // initiates a dash from wall climb
-        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
+        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
             player.SwitchState(player.DashState);
         }

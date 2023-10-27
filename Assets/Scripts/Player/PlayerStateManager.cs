@@ -7,11 +7,9 @@ public class PlayerStateManager : MonoBehaviour
     // declare variables and declare initial values
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpForce = 12f;
-    [SerializeField] private float climbSpeed = 3f;
+    [SerializeField] private float climbSpeed = 5f;
     private bool jumpRequest = false;
     private bool canDash = true;
-
-                                                                                                        public bool wall;
 
     // define the components which are to be used
     private Rigidbody2D rb;
@@ -53,20 +51,11 @@ public class PlayerStateManager : MonoBehaviour
         currentState.UpdatePhysics(this);
 
         // detecing a space bar input
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetAxis("Jump") > 0)
         {
             jumpRequest = true;
             StartCoroutine(ResetJump());
         }       
-
-        if(getTouchingLeft() || getTouchingRight())
-        {
-            wall = true;
-        }
-        else
-        {
-            wall = false;
-        }
     }
 
     // cooroutine sets the jump request boolean to false after 0.3s

@@ -11,12 +11,12 @@ public class PlayerWallJumpState : PlayerBaseState
         // if wall is on left, launch to the right (positive)
         if (player.getTouchingLeft())
         {
-            player.setVelocity(new Vector2(1f, 0.8f) * player.getJumpForce());
+            player.setVelocity(new Vector2(1f, 1f) * player.getJumpForce());
         }
         // if wall is on right, launch to the left (negative)
         else
         {
-            player.setVelocity(new Vector2(-1f, 0.8f) * player.getJumpForce());
+            player.setVelocity(new Vector2(-1f, 1f) * player.getJumpForce());
         }
 
         // starts the process of ending the wall jump
@@ -36,13 +36,13 @@ public class PlayerWallJumpState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // initiates a dash mid wall jump
-        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
+        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
             player.StopCoroutine(endWallJump(player));
             player.SwitchState(player.DashState);
         }
         // initiates wall grab mid wall jump
-        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetKey(KeyCode.LeftShift) || (player.getTouchingRight() && player.getX() > 0 && Input.GetKey(KeyCode.LeftShift)))
+        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetAxis("Wall Hold") > 0 || (player.getTouchingRight() && player.getX() > 0 && Input.GetAxis("Wall Hold") > 0))
         {
             player.StopCoroutine(endWallJump(player));
             player.SwitchState(player.WallGrabState);

@@ -35,13 +35,13 @@ public class PlayerFallingState : PlayerBaseState
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
-        if ((Mathf.Abs(Input.GetAxis("dashY")) > Mathf.Epsilon || Mathf.Abs(Input.GetAxis("dashX")) > Mathf.Epsilon) & player.getCanDash())
+        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
-        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(KeyCode.LeftShift))
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetAxis("Wall Hold") > 0)
         {
             player.SwitchState(player.WallGrabState);
         }
