@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ColliderManager : MonoBehaviour
 {
-    public int screenNumber; 
+    [SerializeField] private int screenNumber; 
     private float xPos;
     private float yPos;
 
     private BoxCollider2D colliderArea;
     public PlayerLocationTracker tracker;
 
-    // Start is called before the first frame update
+    // uses the object's transform component to find initial position
     void Start()
     {
         colliderArea = GetComponent<BoxCollider2D>();
@@ -17,13 +17,15 @@ public class ColliderManager : MonoBehaviour
         yPos = transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // checks for a request, or if this collider is currently active
         if(tracker.GetScreenRequest() == true || tracker.getScreen() == screenNumber)
         {
+            // detects if the player is touching the collider
             if (colliderArea.IsTouchingLayers(LayerMask.GetMask("Player")))
             {
+                // updates screen number, coordinates and request
                 tracker.setScreen(screenNumber);
                 tracker.setScreenRequest(false);
                 tracker.setScreenX(xPos);
@@ -31,19 +33,9 @@ public class ColliderManager : MonoBehaviour
             }
             else
             {
+                // collider is no longer active so a new one is requested
                 tracker.setScreenRequest(true);
             }
         }
     }
-
-    public float getcolliderX()
-    {
-        return xPos;
-    }
-
-    public float getcolliderY()
-    {
-        return yPos;
-    }
-
 }

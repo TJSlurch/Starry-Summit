@@ -2,23 +2,15 @@ using UnityEngine;
 
 public class PlayerLocationTracker : MonoBehaviour
 {
+    // attributes for the currently active screen
     private int screen;
-    private bool newScreenRequest;
     private float screenX;
     private float screenY;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // boolean which requests new collider
+    private bool newScreenRequest;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // accessor and mutator methods for the active screen
     public void setScreen(int value)
     {
         screen = value;
@@ -51,4 +43,16 @@ public class PlayerLocationTracker : MonoBehaviour
     {
         return screenY;
     }
+
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
+
 }
