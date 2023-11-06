@@ -8,7 +8,7 @@ public class PlayerLocationTracker : MonoBehaviour
     private float screenY;
 
     // boolean which requests new collider
-    private bool newScreenRequest;
+    private bool newScreenRequest = true;
 
     // accessor and mutator methods for the active screen
     public void setScreen(int value)
