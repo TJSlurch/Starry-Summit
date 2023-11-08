@@ -5,6 +5,8 @@ public class PlayerWallGrabState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Wall Grab State");
+        player.triggerAnimator("HoldTrigger");
+
         // set gravity to zero to prevent sliding
         player.setGravity(0f);
     }
@@ -45,11 +47,11 @@ public class PlayerWallGrabState : PlayerBaseState
         }
 
         // detects if a jump request is active
-        if (player.getJumpRequest())
+        if (Input.GetAxis("Jump") > 0)
         {
             // switches to wall jump state
-            player.SwitchState(player.WallJumpState);
             player.setJumpRequest(false);
+            player.SwitchState(player.WallJumpState);
         }
     }
 
@@ -57,5 +59,14 @@ public class PlayerWallGrabState : PlayerBaseState
     {
         // maintains the player at the same position
         player.setVelocity(new Vector2(0, 0));
+
+        if (player.getTouchingLeft())
+        {
+            player.setSpriteDirection(true);
+        }
+        else if (player.getTouchingRight())
+        {
+            player.setSpriteDirection(false);
+        }
     }
 }

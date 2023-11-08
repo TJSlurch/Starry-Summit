@@ -5,11 +5,11 @@ public class Parallax : MonoBehaviour
     private float length;
     private float startPosition;
     [SerializeField] private float backgroundSpeed;
-    
+    public PlayerLocationTracker tracker;
+
     // sets intial values using information from components
     void Start()
     {
-        startPosition = transform.position.x;
         // length is divided by three because it is triple tiled
         length = (GetComponent<SpriteRenderer>().bounds.size.x) / 3;
     }
@@ -17,6 +17,9 @@ public class Parallax : MonoBehaviour
     // The object is moved slighyly once per frame
     void Update()
     {
+        // sets the origin position to where the screen is located
+        startPosition = tracker.getScreenX();
+
         // moves the object horizontally depending on the speed attribute
         transform.position = new Vector2(transform.position.x - (backgroundSpeed/1000), transform.position.y);
 
@@ -26,5 +29,7 @@ public class Parallax : MonoBehaviour
             // sets the position to the original location
             transform.position = new Vector2(startPosition, transform.position.y);
         }
+
+        
     }
 }

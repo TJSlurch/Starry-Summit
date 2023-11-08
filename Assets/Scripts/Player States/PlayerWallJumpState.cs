@@ -6,21 +6,30 @@ public class PlayerWallJumpState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Wall Jump State");
-        player.setGravity(2f);
+        player.triggerAnimator("JumpTrigger");
 
-        // if wall is on left, launch to the right (positive)
+        // increases gravity since it is zero in wall climb
+        player.setGravity(8f);
+        player.setJumpRequest(false);
+
+        // if wall is on left, launch up/right
         if (player.getTouchingLeft())
         {
-            player.setVelocity(new Vector2(1f, 1f) * player.getJumpForce());
+            player.setVelocity(new Vector2(0.8f, 0.8f) * player.getJumpForce());
+            player.StartCoroutine(endWallJump(player));
         }
-        // if wall is on right, launch to the left (negative)
+        // if wall is on right, launch up/left
+        else if (player.getTouchingRight())
+        {
+            player.setVelocity(new Vector2(-0.8f, 0.8f) * player.getJumpForce());
+            player.StartCoroutine(endWallJump(player));
+        }
+        // if at the end of the wall, jump vertically only
         else
         {
-            player.setVelocity(new Vector2(-1f, 1f) * player.getJumpForce());
+            player.setVelocity(new Vector2(0f, 1.2f) * player.getJumpForce());
+            player.StartCoroutine(endTopWallJump(player));
         }
-
-        // starts the process of ending the wall jump
-        player.StartCoroutine(endWallJump(player));
     }
 
     // coroutine which resets the player's movement
@@ -28,6 +37,13 @@ public class PlayerWallJumpState : PlayerBaseState
     {
         // waits for the length of the wall jump
         yield return new WaitForSeconds(0.3f);
+        player.SwitchState(player.FallingState);
+    }
+    // coroutine which resets the player's movement if at the top of a wall
+    public IEnumerator endTopWallJump(PlayerStateManager player)
+    {
+        // waits for the length of the wall jump
+        yield return new WaitForSeconds(0.1f);
         player.SwitchState(player.FallingState);
     }
 
@@ -50,6 +66,17 @@ public class PlayerWallJumpState : PlayerBaseState
     }
     public override void UpdatePhysics(PlayerStateManager player)
     {
-        player.setVelocity(new Vector2(player.getX() * 0.92f, player.getY()));
+        // adds horizontal drag to the jump
+        player.setVelocity(new Vector2(player.getX() * 0.98f, player.getY()));
+
+        // flips sprite depending on direction
+        if (player.getX() < 0)
+        {
+            player.setSpriteDirection(true);
+        }
+        else
+        {
+            player.setSpriteDirection(false);
+        }
     }
 }

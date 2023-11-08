@@ -3,13 +3,14 @@ using System.Collections;
 
 public class PlayerFallingState : PlayerBaseState
 {
-    private float fallMultiplier = 5f;
-    private float weightlessGravity = 1f;
+    private float fallMultiplier = 8f;
+    private float weightlessGravity = 4f;
 
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Falling State");
+        player.triggerAnimator("FallTrigger");
     }
 
     // what happens every frame whilst this state is active
@@ -66,6 +67,16 @@ public class PlayerFallingState : PlayerBaseState
         if (Mathf.Abs(player.getInputX()) > 0)
         {
             player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
+        }
+
+        // flips sprite depending on direction
+        if (player.getX() < 0)
+        {
+            player.setSpriteDirection(true);
+        }
+        else
+        {
+            player.setSpriteDirection(false);
         }
     }
 

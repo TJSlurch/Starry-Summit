@@ -13,6 +13,8 @@ public class PlayerStateManager : MonoBehaviour
 
     // define the components which are to be used
     private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer sprite;
     private BoxCollider2D rbRight;
     private BoxCollider2D rbLeft;
     private BoxCollider2D rbDown;
@@ -35,6 +37,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         // using getComponent to retreive the components
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         rbRight = RightCollision.GetComponent<BoxCollider2D>();
         rbLeft = LeftCollision.GetComponent<BoxCollider2D>();
         rbDown = DownCollision.GetComponent<BoxCollider2D>();
@@ -64,6 +68,7 @@ public class PlayerStateManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         jumpRequest = false;
     }
+    
 
     // subroutine which changes the current state
     public void SwitchState(PlayerBaseState state)
@@ -109,7 +114,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         return canDash;
     }
-
     public bool getTouchingRight()
     {
         return rbRight.IsTouchingLayers(LayerMask.GetMask("Ground"));
@@ -139,6 +143,19 @@ public class PlayerStateManager : MonoBehaviour
     public void setCanDash(bool value)
     {
         canDash = value;
+    }
+
+    public void triggerAnimator(string trigger)
+    {
+        animator.SetTrigger(trigger);
+    }
+    public void setSpriteDirection(bool direction)
+    {
+        sprite.flipX = direction;
+    }
+    public void setSpriteCrouch(bool value)
+    {
+        animator.SetBool("Crouched?", value);
     }
 }
 

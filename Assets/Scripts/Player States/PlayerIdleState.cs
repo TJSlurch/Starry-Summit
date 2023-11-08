@@ -7,6 +7,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Idle State");
+        player.triggerAnimator("IdleTrigger");
 
         // sets velocity to 0 as soon as no input is detected
         player.setVelocity(new Vector2(0, player.getY()));
@@ -19,8 +20,8 @@ public class PlayerIdleState : PlayerBaseState
         if (player.getJumpRequest())
         {
             // switches to jump state
-            player.SwitchState(player.JumpState);
             player.setJumpRequest(false);
+            player.SwitchState(player.JumpState);
         }
 
         // detects if vertical velocity is negative (downwards)
@@ -50,9 +51,17 @@ public class PlayerIdleState : PlayerBaseState
         }
     }
 
-    // no movement occurs during idle state, so physics don't need updating
+    // no movement occurs during idle state, so physics don't need updating, only the visual crouch
     public override void UpdatePhysics(PlayerStateManager player)
     {
-
+        // pressing down sets the crouch animation to true
+        if (player.getInputY() < 0)
+        {
+            player.setSpriteCrouch(true);
+        }
+        else
+        {
+            player.setSpriteCrouch(false);
+        }
     }
 }

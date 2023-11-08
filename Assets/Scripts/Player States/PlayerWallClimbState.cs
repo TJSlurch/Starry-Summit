@@ -7,6 +7,7 @@ public class PlayerWallClimbState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Wall Climb State");
+        player.triggerAnimator("ClimbTrigger");
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -43,16 +44,13 @@ public class PlayerWallClimbState : PlayerBaseState
             player.SwitchState(player.WallGrabState);
         }
 
-
         // detects if a wall jump request is active
-        if (player.getJumpRequest())
+        if (Input.GetAxis("Jump") > 0)
         {
             // switches to jump state
-            player.SwitchState(player.WallJumpState);
             player.setJumpRequest(false);
+            player.SwitchState(player.WallJumpState);
         }
-
-
     }
     public override void UpdatePhysics(PlayerStateManager player)
     {
@@ -81,6 +79,16 @@ public class PlayerWallClimbState : PlayerBaseState
         else
         {
             player.setVelocity(new Vector2(0, 0));
-        } 
+        }
+
+        // flips the sprite depending on direction
+        if (player.getTouchingLeft())
+        {
+            player.setSpriteDirection(true);
+        }
+        else if(player.getTouchingRight())
+        {
+            player.setSpriteDirection(false);
+        }
     }
 }

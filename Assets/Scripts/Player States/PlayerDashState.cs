@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerBaseState
 {
-    private float dashSpeed = 30f;
+    private float dashSpeed = 40f;
     private float dashTime = 0.15f;                            
 
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Dash State");
+        player.triggerAnimator("DashTrigger");
         player.setCanDash(false);
 
         // sets gravity to zero and launches player in the direction inputted 
@@ -84,7 +85,15 @@ public class PlayerDashState : PlayerBaseState
     // no movement occurs during idle state, so physics don't need updating
     public override void UpdatePhysics(PlayerStateManager player)
     {
-        
+        // flips sprite depending on direction
+        if (player.getX() < 0)
+        {
+            player.setSpriteDirection(true);
+        }
+        else
+        {
+            player.setSpriteDirection(false);
+        }
     }
 
     // function to round values away from zero

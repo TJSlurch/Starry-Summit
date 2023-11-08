@@ -7,6 +7,7 @@ public class PlayerRunState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Run State");
+        player.triggerAnimator("RunTrigger");
     }
 
     // what happens every frame whilst this state is active
@@ -30,8 +31,8 @@ public class PlayerRunState : PlayerBaseState
         if (player.getJumpRequest())
         {
             // switches to jump state
-            player.SwitchState(player.JumpState);
             player.setJumpRequest(false);
+            player.SwitchState(player.JumpState);
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
@@ -53,6 +54,16 @@ public class PlayerRunState : PlayerBaseState
     {
         // detects horizontal input and uses it to change player velocity
         player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
+
+        // flips the sprite depending on direction
+        if(player.getX() < 0)
+        {
+            player.setSpriteDirection(true);
+        }
+        else
+        {
+            player.setSpriteDirection(false);
+        }
     }
 }
 

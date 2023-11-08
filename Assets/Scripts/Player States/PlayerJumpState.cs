@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerBaseState
 {
-    private float lowJumpMultiplier = 3.5f;
-    private float regularGravity = 2f;
-    private float weightlessGravity = 1f;
+    private float lowJumpMultiplier = 11f;
+    private float regularGravity = 6f;
+    private float weightlessGravity = 2f;
 
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("Entering Jump State");
+        player.triggerAnimator("JumpTrigger");
+        player.setJumpRequest(false);
+
         // initiates a jump as soon as this state is switched to
         player.setVelocity(new Vector2(player.getX(), player.getJumpForce()));
     }
@@ -55,7 +58,18 @@ public class PlayerJumpState : PlayerBaseState
         {
             player.setGravity(lowJumpMultiplier);
         }
+
         // detects horizontal input and uses it to change player velocity
         player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
+
+        // flips sprite depending on direction
+        if (player.getX() < 0)
+        {
+            player.setSpriteDirection(true);
+        }
+        else
+        {
+            player.setSpriteDirection(false);
+        }
     }
 }
