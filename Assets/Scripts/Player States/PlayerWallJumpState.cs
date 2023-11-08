@@ -7,6 +7,7 @@ public class PlayerWallJumpState : PlayerBaseState
     {
         Debug.Log("Entering Wall Jump State");
         player.triggerAnimator("JumpTrigger");
+        player.playJump();
 
         // increases gravity since it is zero in wall climb
         player.setGravity(8f);

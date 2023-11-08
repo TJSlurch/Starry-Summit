@@ -8,6 +8,7 @@ public class PlayerWallClimbState : PlayerBaseState
     {
         Debug.Log("Entering Wall Climb State");
         player.triggerAnimator("ClimbTrigger");
+        player.playClimb();
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -18,16 +19,19 @@ public class PlayerWallClimbState : PlayerBaseState
             if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
             {
                 // switches player to run state
+                player.stopPlayingClimb();
                 player.SwitchState(player.RunState);
             }
             else if (player.getTouchingDown())
             {
                 // switches to idle state
+                player.stopPlayingClimb();
                 player.SwitchState(player.IdleState);
             }
             else
             {
                 // switches player to falling state
+                player.stopPlayingClimb();
                 player.SwitchState(player.FallingState);
             }
         }
@@ -35,12 +39,14 @@ public class PlayerWallClimbState : PlayerBaseState
         // initiates a dash from wall climb
         if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
+            player.stopPlayingClimb();
             player.SwitchState(player.DashState);
         }
 
         // switches back to wall grab state if no vertical velocity is detected
         if (Mathf.Abs(player.getInputY()) < Mathf.Epsilon)
         {
+            player.stopPlayingClimb();
             player.SwitchState(player.WallGrabState);
         }
 
@@ -49,6 +55,7 @@ public class PlayerWallClimbState : PlayerBaseState
         {
             // switches to jump state
             player.setJumpRequest(false);
+            player.stopPlayingClimb();
             player.SwitchState(player.WallJumpState);
         }
     }

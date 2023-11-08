@@ -8,6 +8,7 @@ public class PlayerRunState : PlayerBaseState
     {
         Debug.Log("Entering Run State");
         player.triggerAnimator("RunTrigger");
+        player.playRun();
     }
 
     // what happens every frame whilst this state is active
@@ -17,6 +18,7 @@ public class PlayerRunState : PlayerBaseState
         if (Mathf.Abs(player.getInputX()) < Mathf.Epsilon && player.getTouchingDown())
         {
             // switches to idle state
+            player.stopPlayingRun();
             player.SwitchState(player.IdleState);
         }
 
@@ -24,6 +26,7 @@ public class PlayerRunState : PlayerBaseState
         if (player.getY() < -0.01 && !player.getTouchingDown())
         {
             // switches player to falling state
+            player.stopPlayingRun();
             player.SwitchState(player.FallingState);
         }
 
@@ -32,18 +35,21 @@ public class PlayerRunState : PlayerBaseState
         {
             // switches to jump state
             player.setJumpRequest(false);
+            player.stopPlayingRun();
             player.SwitchState(player.JumpState);
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
         if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
+            player.stopPlayingRun();
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
         if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetAxis("Wall Hold") > 0)
         {
+            player.stopPlayingRun();
             player.SwitchState(player.WallGrabState);
         }
 

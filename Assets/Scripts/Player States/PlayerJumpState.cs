@@ -11,6 +11,8 @@ public class PlayerJumpState : PlayerBaseState
     {
         Debug.Log("Entering Jump State");
         player.triggerAnimator("JumpTrigger");
+        player.playJump();
+
         player.setJumpRequest(false);
 
         // initiates a jump as soon as this state is switched to

@@ -22,6 +22,13 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] private GameObject LeftCollision;
     [SerializeField] private GameObject DownCollision;
 
+    // declare the sound effects
+    [SerializeField] private AudioSource runAS;
+    [SerializeField] private AudioSource jumpAS;
+    [SerializeField] private AudioSource dashAS;
+    [SerializeField] private AudioSource climbAS;
+
+
     // creating an instance of each state
     private PlayerBaseState currentState;
     public PlayerIdleState IdleState = new PlayerIdleState();
@@ -144,7 +151,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         canDash = value;
     }
-
     public void triggerAnimator(string trigger)
     {
         animator.SetTrigger(trigger);
@@ -157,5 +163,35 @@ public class PlayerStateManager : MonoBehaviour
     {
         animator.SetBool("Crouched?", value);
     }
+
+    // public methods to play sound effects
+    public void playRun()
+    {
+        runAS.Play();
+    }
+    public void playJump()
+    {
+        jumpAS.Play();
+    }
+    public void playDash()
+    {
+        dashAS.Play();
+    }
+    public void playClimb()
+    {
+        climbAS.Play();
+    }
+
+    // public methods to stop the sound effects which loop
+    public void stopPlayingRun()
+    {
+        dashAS.Stop();
+    }
+    public void stopPlayingClimb()
+    {
+        climbAS.Stop();
+    }
+
+
 }
 

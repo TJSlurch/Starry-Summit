@@ -11,6 +11,8 @@ public class PlayerDashState : PlayerBaseState
     {
         Debug.Log("Entering Dash State");
         player.triggerAnimator("DashTrigger");
+        player.playDash();
+
         player.setCanDash(false);
 
         // sets gravity to zero and launches player in the direction inputted 
