@@ -43,16 +43,4 @@ public class PlayerLocationTracker : MonoBehaviour
     {
         return screenY;
     }
-
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
 }
