@@ -191,7 +191,5 @@ public class PlayerStateManager : MonoBehaviour
     {
         climbAS.Stop();
     }
-
-
 }
 

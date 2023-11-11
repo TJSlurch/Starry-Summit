@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class TextBoxManager : MonoBehaviour
 {
     // defines the game objects and respective variables
-    [SerializeField] PlayerLocationTracker tracker;
-    [SerializeField] GameObject TextboxUI;
-    [SerializeField] GameObject TextUI;
-    [SerializeField] GameObject ImageUI;
-    [SerializeField] List<Sprite> expressions;
+    [SerializeField] private PlayerLocationTracker tracker;
+    [SerializeField] private GameObject TextboxUI;
+    [SerializeField] private GameObject TextUI;
+    [SerializeField] private GameObject ImageUI;
+    [SerializeField] private List<Sprite> expressions;
     private GameObject textbox;
     private TextMeshProUGUI text;
     private Image image;
