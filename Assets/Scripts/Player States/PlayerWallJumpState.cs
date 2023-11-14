@@ -68,7 +68,7 @@ public class PlayerWallJumpState : PlayerBaseState
     public override void UpdatePhysics(PlayerStateManager player)
     {
         // adds horizontal drag to the jump
-        player.setVelocity(new Vector2(player.getX() * 0.98f, player.getY()));
+        player.setVelocity(new Vector2(player.getX() * Time.deltaTime * 100 * 0.98f, player.getY()));
 
         // flips sprite depending on direction
         if (player.getX() < 0)
