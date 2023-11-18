@@ -55,20 +55,26 @@ public class PlayerWallJumpState : PlayerBaseState
         // initiates a dash mid wall jump
         if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
-            player.StopCoroutine(endWallJump(player));
+            player.StopAllCoroutines();
             player.SwitchState(player.DashState);
         }
         // initiates wall grab mid wall jump
-        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetAxis("Wall Hold") > 0 || (player.getTouchingRight() && player.getX() > 0 && Input.GetAxis("Wall Hold") > 0))
+        if (player.getTouchingLeft() && Input.GetAxis("Wall Hold") > 0 && player.getX() > 0 || (player.getTouchingRight() && Input.GetAxis("Wall Hold") > 0) && player.getX() > 0)
         {
-            player.StopCoroutine(endWallJump(player));
+            player.StopAllCoroutines();
             player.SwitchState(player.WallGrabState);
+        }
+        // detecting if spikes are collided with
+        if (player.getTouchingSpikes())
+        {
+            player.StopAllCoroutines();
+            player.SwitchState(player.DeathState);
         }
     }
     public override void UpdatePhysics(PlayerStateManager player)
     {
         // adds horizontal drag to the jump
-        player.setVelocity(new Vector2(player.getX() * Time.deltaTime * 100 * 0.98f, player.getY()));
+        player.setVelocity(new Vector2(player.getX() * 0.98f, player.getY()));
 
         // flips sprite depending on direction
         if (player.getX() < 0)

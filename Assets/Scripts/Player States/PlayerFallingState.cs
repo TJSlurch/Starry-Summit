@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerFallingState : PlayerBaseState
 {
-    private float fallMultiplier = 8f;
+    private float fallMultiplier = 7f;
     private float weightlessGravity = 4f;
 
     // what happens when this state is switched to
@@ -46,6 +46,12 @@ public class PlayerFallingState : PlayerBaseState
         {
             player.SwitchState(player.WallGrabState);
         }
+
+        // detecting if spikes are collided with
+        if (player.getTouchingSpikes())
+        {
+            player.SwitchState(player.DeathState);
+        }
     }
 
     // what happens every frame whilst this state is active
@@ -68,13 +74,17 @@ public class PlayerFallingState : PlayerBaseState
         {
             player.setVelocity(new Vector2(player.getInputX() * player.getSpeed(), player.getY()));
         }
+        else
+        {
+            player.setVelocity(new Vector2(0, player.getY()));
+        }
 
         // flips sprite depending on direction
         if (player.getX() < 0)
         {
             player.setSpriteDirection(true);
         }
-        else
+        else if (player.getX() > 0)
         {
             player.setSpriteDirection(false);
         }

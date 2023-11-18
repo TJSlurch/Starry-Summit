@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -21,12 +21,14 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] private GameObject RightCollision;
     [SerializeField] private GameObject LeftCollision;
     [SerializeField] private GameObject DownCollision;
+    [SerializeField] private PlayerLocationTracker tracker;
 
     // declare the sound effects
     [SerializeField] private AudioSource runAS;
     [SerializeField] private AudioSource jumpAS;
     [SerializeField] private AudioSource dashAS;
     [SerializeField] private AudioSource climbAS;
+    [SerializeField] private AudioSource deathAS;
 
 
     // creating an instance of each state
@@ -39,6 +41,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerWallGrabState WallGrabState = new PlayerWallGrabState();
     public PlayerWallClimbState WallClimbState = new PlayerWallClimbState();
     public PlayerWallJumpState WallJumpState = new PlayerWallJumpState();
+    public PlayerDeathState DeathState = new PlayerDeathState();
 
     void Start()
     {
@@ -57,16 +60,22 @@ public class PlayerStateManager : MonoBehaviour
 
     void Update()
     {
-        // updating the update methods for the current state's script
-        currentState.UpdateState(this);
-        currentState.UpdatePhysics(this);
+        // updating the UpdateState method for the current state's script
+        currentState.UpdateState(this);    
 
         // detecing a space bar input
         if (Input.GetAxis("Jump") > 0)
         {
             jumpRequest = true;
             StartCoroutine(ResetJump());
-        }       
+        }
+    }
+
+    // Fixed Update is more reliable for movement related updates
+    private void FixedUpdate()
+    {
+        // updating the UpdateState method for the current state's script
+        currentState.UpdatePhysics(this);
     }
 
     // cooroutine sets the jump request boolean to false after 0.3s
@@ -82,12 +91,22 @@ public class PlayerStateManager : MonoBehaviour
     {
         currentState = state;
         state.EnterState(this);
+        // stop looping sound effects
+        climbAS.Stop();
+        runAS.Stop();
+    }
+
+    // called when the player needs to reset position
+    public void ResetToCheckpoint()
+    {
+        // sets to the checkpoint position from PlayerLocationTracker
+        transform.position = new Vector2(tracker.getRespawnX(), tracker.getRespawnY());
     }
 
     // accessor methods for the private attributes
     public float getInputX()
     {
-    return Input.GetAxis("Horizontal");
+        return Input.GetAxis("Horizontal");
     }
     public float getInputY()
     {
@@ -132,6 +151,10 @@ public class PlayerStateManager : MonoBehaviour
     public bool getTouchingDown()
     {
         return rbDown.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    }
+    public bool getTouchingSpikes()
+    {
+        return rb.IsTouchingLayers(LayerMask.GetMask("Spikes"));
     }
 
     // mutator methods for the private attributes
@@ -181,15 +204,9 @@ public class PlayerStateManager : MonoBehaviour
     {
         climbAS.Play();
     }
-
-    // public methods to stop the sound effects which loop
-    public void stopPlayingRun()
+    public void playDeath()
     {
-        dashAS.Stop();
-    }
-    public void stopPlayingClimb()
-    {
-        climbAS.Stop();
+        deathAS.Play();
     }
 }
 

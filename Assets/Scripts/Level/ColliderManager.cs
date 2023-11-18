@@ -5,6 +5,8 @@ public class ColliderManager : MonoBehaviour
     [SerializeField] private int screenNumber; 
     private float xPos;
     private float yPos;
+    [SerializeField] private float respawnXpos;
+    [SerializeField] private float respawnYpos;
 
     private BoxCollider2D colliderArea;
     public PlayerLocationTracker tracker;
@@ -30,6 +32,8 @@ public class ColliderManager : MonoBehaviour
                 tracker.setScreenRequest(false);
                 tracker.setScreenX(xPos);
                 tracker.setScreenY(yPos);
+                tracker.setRespawnX(respawnXpos);
+                tracker.setRespawnY(respawnYpos);
             }
             else
             {

@@ -49,6 +49,12 @@ public class PlayerIdleState : PlayerBaseState
         {
             player.SwitchState(player.WallGrabState);
         }
+
+        // detecting if spikes are collided with
+        if (player.getTouchingSpikes())
+        {
+            player.SwitchState(player.DeathState);
+        }
     }
 
     // no movement occurs during idle state, so physics don't need updating, only the visual crouch

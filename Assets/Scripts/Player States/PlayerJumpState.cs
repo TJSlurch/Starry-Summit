@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerJumpState : PlayerBaseState
 {
     private float lowJumpMultiplier = 11f;
-    private float regularGravity = 6f;
+    private float regularGravity = 5f;
     private float weightlessGravity = 2f;
 
     // what happens when this state is switched to
@@ -40,6 +40,12 @@ public class PlayerJumpState : PlayerBaseState
         {
             player.SwitchState(player.WallGrabState);
         }
+
+        // detecting if spikes are collided with
+        if (player.getTouchingSpikes())
+        {
+            player.SwitchState(player.DeathState);
+        }
     }
 
     // what happens every frame whilst this state is active
@@ -69,7 +75,7 @@ public class PlayerJumpState : PlayerBaseState
         {
             player.setSpriteDirection(true);
         }
-        else
+        else if (player.getX() > 0)
         {
             player.setSpriteDirection(false);
         }

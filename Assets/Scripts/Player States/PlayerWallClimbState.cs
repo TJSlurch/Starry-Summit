@@ -19,19 +19,16 @@ public class PlayerWallClimbState : PlayerBaseState
             if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
             {
                 // switches player to run state
-                player.stopPlayingClimb();
                 player.SwitchState(player.RunState);
             }
             else if (player.getTouchingDown())
             {
                 // switches to idle state
-                player.stopPlayingClimb();
                 player.SwitchState(player.IdleState);
             }
             else
             {
                 // switches player to falling state
-                player.stopPlayingClimb();
                 player.SwitchState(player.FallingState);
             }
         }
@@ -39,24 +36,27 @@ public class PlayerWallClimbState : PlayerBaseState
         // initiates a dash from wall climb
         if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
         {
-            player.stopPlayingClimb();
             player.SwitchState(player.DashState);
         }
 
         // switches back to wall grab state if no vertical velocity is detected
         if (Mathf.Abs(player.getInputY()) < Mathf.Epsilon)
         {
-            player.stopPlayingClimb();
             player.SwitchState(player.WallGrabState);
         }
 
-        // detects if a wall jump request is active
-        if (Input.GetAxis("Jump") > 0)
+        // detects if a wall jump request is active, or if top of wall is reached
+        if (Input.GetAxis("Jump") > 0 || (previousClimbDirection == 1 && !player.getTouchingLeft() && !player.getTouchingRight()))
         {
             // switches to jump state
             player.setJumpRequest(false);
-            player.stopPlayingClimb();
             player.SwitchState(player.WallJumpState);
+        }
+
+        // detecting if spikes are collided with
+        if (player.getTouchingSpikes())
+        {
+            player.SwitchState(player.DeathState);
         }
     }
     public override void UpdatePhysics(PlayerStateManager player)
@@ -77,9 +77,8 @@ public class PlayerWallClimbState : PlayerBaseState
         }
 
         // if touching wall, the player can move as usual
-        // if last climbed direction was up and the player is inputting down, allow movement
         // if last climbed direction was down and the player is inputting up, allow movement
-        if ((player.getTouchingLeft() || player.getTouchingRight()) || (previousClimbDirection == 1 && player.getInputY() < 0) || (previousClimbDirection == -1 && player.getInputY() > 0))
+        if ((player.getTouchingLeft() || player.getTouchingRight()) || (previousClimbDirection == -1 && player.getInputY() > 0))
         {
             player.setVelocity(new Vector2(0, player.getInputY() * player.getClimbSpeed()));
         }

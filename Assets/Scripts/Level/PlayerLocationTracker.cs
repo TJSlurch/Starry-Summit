@@ -6,6 +6,9 @@ public class PlayerLocationTracker : MonoBehaviour
     private int screen;
     private float screenX;
     private float screenY;
+    private float respawnX;
+    private float respawnY;
+
 
     // boolean which requests new collider
     private bool newScreenRequest = true;
@@ -42,5 +45,23 @@ public class PlayerLocationTracker : MonoBehaviour
     public float getScreenY()
     {
         return screenY;
+    }
+
+
+    public void setRespawnX(float value)
+    {
+        respawnX = value;
+    }
+    public float getRespawnX()
+    {
+        return respawnX;
+    }
+    public void setRespawnY(float value)
+    {
+        respawnY = value;
+    }
+    public float getRespawnY()
+    {
+        return respawnY;
     }
 }

@@ -53,6 +53,12 @@ public class PlayerWallGrabState : PlayerBaseState
             player.setJumpRequest(false);
             player.SwitchState(player.WallJumpState);
         }
+
+        // detecting if spikes are collided with
+        if (player.getTouchingSpikes())
+        {
+            player.SwitchState(player.DeathState);
+        }
     }
 
     public override void UpdatePhysics(PlayerStateManager player)
