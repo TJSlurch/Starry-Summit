@@ -9,6 +9,7 @@ public class PlayerRunState : PlayerBaseState
         Debug.Log("Entering Run State");
         player.triggerAnimator("RunTrigger");
         player.playRun();
+        player.setGravity(8f);
     }
 
     // what happens every frame whilst this state is active

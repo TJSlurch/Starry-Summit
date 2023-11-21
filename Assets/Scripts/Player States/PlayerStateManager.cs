@@ -89,11 +89,11 @@ public class PlayerStateManager : MonoBehaviour
     // subroutine which changes the current state
     public void SwitchState(PlayerBaseState state)
     {
-        currentState = state;
-        state.EnterState(this);
         // stop looping sound effects
         climbAS.Stop();
         runAS.Stop();
+        currentState = state;
+        state.EnterState(this);
     }
 
     // called when the player needs to reset position

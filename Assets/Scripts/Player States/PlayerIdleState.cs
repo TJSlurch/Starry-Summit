@@ -8,6 +8,7 @@ public class PlayerIdleState : PlayerBaseState
     {
         Debug.Log("Entering Idle State");
         player.triggerAnimator("IdleTrigger");
+        player.setGravity(8f);
 
         // sets velocity to 0 as soon as no input is detected
         player.setVelocity(new Vector2(0, player.getY()));

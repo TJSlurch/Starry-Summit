@@ -32,7 +32,7 @@ public class TextBoxManager : MonoBehaviour
     }
     public void setText(string sentence)
     {
-        text.text = (sentence);
+        text.text = sentence;
     }
     public void setImage(int value)
     {

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerFallingState : PlayerBaseState
 {
-    private float fallMultiplier = 7f;
-    private float weightlessGravity = 4f;
+    private float fallMultiplier = 5f;
+    private float weightlessGravity = 2f;
 
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
