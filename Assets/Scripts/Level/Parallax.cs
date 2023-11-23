@@ -15,7 +15,7 @@ public class Parallax : MonoBehaviour
     }
 
     // The object is moved slighyly once per frame
-    void Update()
+    void FixedUpdate()
     {
         // sets the origin position to where the screen is located
         startPosition = tracker.getScreenX();
