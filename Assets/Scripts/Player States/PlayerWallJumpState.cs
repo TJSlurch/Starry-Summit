@@ -28,7 +28,7 @@ public class PlayerWallJumpState : PlayerBaseState
         // if at the end of the wall, jump vertically only
         else
         {
-            player.setVelocity(new Vector2(0f, 1.2f) * player.getJumpForce());
+            player.setVelocity(new Vector2(0f, 0.8f) * player.getJumpForce());
             player.StartCoroutine(endTopWallJump(player));
         }
     }
