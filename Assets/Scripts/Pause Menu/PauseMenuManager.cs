@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
 {
@@ -10,11 +11,34 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] GameObject loading;
     [SerializeField] GameObject textbox;
     [SerializeField] GameObject counter;
+    [SerializeField] GameObject background;
+    [SerializeField] GameObject hamburger;
 
     private bool isPaused;
 
     // audio source for click sfx
     [SerializeField] AudioSource src;
+
+    void Start()
+    {
+        // setup listener
+        Button btn = hamburger.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClick);
+    }
+
+    void TaskOnClick()
+    {
+        if (!isPaused)
+        {
+            isPaused = true;
+            NewMenuScreen("paused");
+        }
+        else
+        {
+            isPaused = false;
+            NewMenuScreen("resume");
+        }
+    }
 
     private void Update()
     {
@@ -30,7 +54,6 @@ public class PauseMenuManager : MonoBehaviour
                 isPaused = false;
                 NewMenuScreen("resume");
             }
-
         }
     }
 
@@ -39,10 +62,8 @@ public class PauseMenuManager : MonoBehaviour
     {
         // disable all UI elements
         paused.SetActive(false);
-        textbox.SetActive(false);
-        counter.SetActive(false);
-                //records.SetActive(false);
-                //options.SetActive(false);
+        records.SetActive(false);
+        options.SetActive(false);
 
         // play sound effect
         src.Play();
@@ -52,23 +73,31 @@ public class PauseMenuManager : MonoBehaviour
             case "resume":
                 // don't enable any other menu
                 Time.timeScale = 1f;
+                isPaused = false;
+                background.SetActive(false);
+                hamburger.SetActive(true);
                 break;
             case "paused":
                 // enable paused UI
                 paused.SetActive(true);
+                background.SetActive(true);
+                textbox.SetActive(false);
+                counter.SetActive(false);
+                hamburger.SetActive(false);
                 Time.timeScale = 0f;
                 break;
             case "records":
                 // enable records UI
-                                        //records.SetActive(true);
+                records.SetActive(true);
                 break;
             case "options":
                 // enable options UI
-                                    //options.SetActive(true);
+                options.SetActive(true);
                 break;
             case "exit":
                 // enable loading UI
-                                    //loading.SetActive(true);
+                loading.SetActive(true);
+                Time.timeScale = 1f;
                 // return to menu
                 SceneManager.LoadScene("Menu");
                 break;
