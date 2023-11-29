@@ -14,10 +14,11 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] GameObject background;
     [SerializeField] GameObject hamburger;
 
-    private bool isPaused;
-
     // audio source for click sfx
     [SerializeField] AudioSource src;
+
+    // the variable which tracks if the pause menu is active
+    private bool isPaused;
 
     void Start()
     {
@@ -28,32 +29,44 @@ public class PauseMenuManager : MonoBehaviour
 
     void TaskOnClick()
     {
-        if (!isPaused)
-        {
-            isPaused = true;
-            NewMenuScreen("paused");
-        }
-        else
-        {
-            isPaused = false;
-            NewMenuScreen("resume");
-        }
+        changePaused();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        // presseing escape pauses/unpauses the game
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!isPaused)
-            {
-                isPaused = true;
-                NewMenuScreen("paused");
-            }
-            else
-            {
-                isPaused = false;
-                NewMenuScreen("resume");
-            }
+            changePaused();
+        }
+    }
+
+
+    private void changePaused()
+    {
+        // if not paused
+        if (!isPaused)
+        {
+            isPaused = true;
+            background.SetActive(true);
+            textbox.SetActive(false);
+            counter.SetActive(false);
+            hamburger.SetActive(false);
+            // pauses
+            Time.timeScale = 0f;
+            NewMenuScreen("paused");
+        }
+        // if paused
+        else
+        {
+            isPaused = false;
+            background.SetActive(false);
+            paused.SetActive(false);
+            records.SetActive(false);
+            options.SetActive(false);
+            hamburger.SetActive(true);
+            // unpauses
+            Time.timeScale = 1f;
         }
     }
 
@@ -70,21 +83,13 @@ public class PauseMenuManager : MonoBehaviour
 
         switch (menu)
         {
-            case "resume":
-                // don't enable any other menu
-                Time.timeScale = 1f;
-                isPaused = false;
-                background.SetActive(false);
-                hamburger.SetActive(true);
-                break;
             case "paused":
                 // enable paused UI
                 paused.SetActive(true);
-                background.SetActive(true);
-                textbox.SetActive(false);
-                counter.SetActive(false);
-                hamburger.SetActive(false);
-                Time.timeScale = 0f;
+                break;
+            case "resume":
+                // switch paused state
+                changePaused();
                 break;
             case "records":
                 // enable records UI

@@ -30,7 +30,6 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] private AudioSource climbAS;
     [SerializeField] private AudioSource deathAS;
 
-
     // creating an instance of each state
     private PlayerBaseState currentState;
     public PlayerIdleState IdleState = new PlayerIdleState();

@@ -12,6 +12,10 @@ public class PlayerDeathState : PlayerBaseState
         player.setVelocity(new Vector2(0, 0));
         player.setGravity(0f);
 
+        // increase death stat
+        StatsTracker.currentDeaths++;
+        StatsTracker.totalDeaths++;
+
         // starts the respawn sequence
         player.StartCoroutine(respawn(player));
     }

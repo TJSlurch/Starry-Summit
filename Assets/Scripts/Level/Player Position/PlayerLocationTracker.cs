@@ -9,9 +9,15 @@ public class PlayerLocationTracker : MonoBehaviour
     private float respawnX;
     private float respawnY;
 
-
     // boolean which requests new collider
     private bool newScreenRequest = true;
+
+    private void Update()
+    {
+        // FIXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        StatsTracker.currentProgress = Mathf.RoundToInt(screen / 10 * 100);
+        Debug.Log(Mathf.RoundToInt((screen / 10) * 100));
+    }
 
     // accessor and mutator methods for the active screen
     public void setScreen(int value)
@@ -46,7 +52,6 @@ public class PlayerLocationTracker : MonoBehaviour
     {
         return screenY;
     }
-
 
     public void setRespawnX(float value)
     {
