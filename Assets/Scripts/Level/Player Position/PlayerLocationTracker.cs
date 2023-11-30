@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerLocationTracker : MonoBehaviour
 {
     // attributes for the currently active screen
-    private int screen;
+    private float screen;
     private float screenX;
     private float screenY;
     private float respawnX;
@@ -12,11 +12,13 @@ public class PlayerLocationTracker : MonoBehaviour
     // boolean which requests new collider
     private bool newScreenRequest = true;
 
+    // number of screens (to be set when level is finalised)
+    private int numOfScreens = 15;
+
     private void Update()
     {
-        // FIXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        StatsTracker.currentProgress = Mathf.RoundToInt(screen / 10 * 100);
-        Debug.Log(Mathf.RoundToInt((screen / 10) * 100));
+        // finds the percentage of the level completed
+        StatsTracker.currentProgress = Mathf.RoundToInt(screen / numOfScreens * 100);
     }
 
     // accessor and mutator methods for the active screen
@@ -26,7 +28,7 @@ public class PlayerLocationTracker : MonoBehaviour
     }
     public int getScreen()
     {
-        return screen;
+        return Mathf.RoundToInt(screen);
     }
     public void setScreenRequest(bool value)
     {

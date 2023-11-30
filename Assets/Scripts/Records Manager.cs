@@ -9,9 +9,19 @@ public class RecordsManager : MonoBehaviour
     [SerializeField] GameObject CurrentCollectiblesObject;
     [SerializeField] GameObject CurrentTimeObject;
     [SerializeField] GameObject CurrentProgressObject;
+
     [SerializeField] GameObject TotalDeathsObject;
     [SerializeField] GameObject TotalCollectiblesObject;
     [SerializeField] GameObject TotalTimeObject;
+
+    [SerializeField] GameObject FewestDeathsObject;
+    [SerializeField] GameObject MostCollectiblesObject;
+    [SerializeField] GameObject FastestRunObject;
+
+    [SerializeField] GameObject FastestDeathlessObject;
+    [SerializeField] GameObject FastestAllCollectiblesObject;
+    [SerializeField] GameObject FastestPerfectObject;
+
     private TextMeshProUGUI currentDeathsText;
     private TextMeshProUGUI currentCollectiblesText;
     private TextMeshProUGUI currentTimeText;
@@ -19,6 +29,13 @@ public class RecordsManager : MonoBehaviour
     private TextMeshProUGUI totalDeathsText;
     private TextMeshProUGUI totalCollectiblesText;
     private TextMeshProUGUI totalTimeText;
+    private TextMeshProUGUI FewestDeathsText;
+    private TextMeshProUGUI MostCollectiblesText;
+    private TextMeshProUGUI FastestRunText;
+    private TextMeshProUGUI FastestDeathlessText;
+    private TextMeshProUGUI FastestAllCollectiblesText;
+    private TextMeshProUGUI FastestPerfectText;
+
 
     private void Start()
     {
@@ -30,6 +47,14 @@ public class RecordsManager : MonoBehaviour
         totalDeathsText = TotalDeathsObject.GetComponent<TextMeshProUGUI>();
         totalCollectiblesText = TotalCollectiblesObject.GetComponent<TextMeshProUGUI>();
         totalTimeText = TotalTimeObject.GetComponent<TextMeshProUGUI>();
+
+        // UNFINSUIHWDEDDD
+        FewestDeathsText = TotalDeathsObject.GetComponent<TextMeshProUGUI>();
+        MostCollectiblesText = TotalCollectiblesObject.GetComponent<TextMeshProUGUI>();
+        FastestRunText = TotalTimeObject.GetComponent<TextMeshProUGUI>();
+        FastestDeathlessText = TotalDeathsObject.GetComponent<TextMeshProUGUI>();
+        FastestAllCollectiblesText = TotalCollectiblesObject.GetComponent<TextMeshProUGUI>();
+        FastestPerfectText = TotalTimeObject.GetComponent<TextMeshProUGUI>();
     }
 
     void Update()

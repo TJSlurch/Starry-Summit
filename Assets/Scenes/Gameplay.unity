@@ -331,7 +331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: -25}
+  m_AnchoredPosition: {x: -300, y: -25}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &30928892
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 52546021}
   - component: {fileID: 52546020}
   m_Layer: 0
-  m_Name: Collider5
+  m_Name: Collider4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 5
+  screenNumber: 4
   respawnXpos: 128.5
   respawnYpos: 27
   tracker: {fileID: 474445953}
@@ -16789,7 +16789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: 175}
+  m_AnchoredPosition: {x: -300, y: 175}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594075713
@@ -17188,7 +17188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: -225}
+  m_AnchoredPosition: {x: -300, y: -225}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &708120378
@@ -22776,7 +22776,7 @@ GameObject:
   - component: {fileID: 875210199}
   - component: {fileID: 875210198}
   m_Layer: 0
-  m_Name: Collider8
+  m_Name: Collider9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22809,7 +22809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 8
+  screenNumber: 7
   respawnXpos: 200
   respawnYpos: 24
   tracker: {fileID: 474445953}
@@ -22870,7 +22870,7 @@ GameObject:
   - component: {fileID: 876033353}
   - component: {fileID: 876033352}
   m_Layer: 0
-  m_Name: Collider6
+  m_Name: Collider5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22903,7 +22903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 6
+  screenNumber: 5
   respawnXpos: 164
   respawnYpos: 34
   tracker: {fileID: 474445953}
@@ -27792,7 +27792,7 @@ GameObject:
   - component: {fileID: 900139865}
   - component: {fileID: 900139864}
   m_Layer: 0
-  m_Name: Collider 11
+  m_Name: Collider12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27825,7 +27825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 11
+  screenNumber: 10
   respawnXpos: 240.5
   respawnYpos: 43.1
   tracker: {fileID: 474445953}
@@ -74772,7 +74772,7 @@ GameObject:
   - component: {fileID: 1082402740}
   - component: {fileID: 1082402741}
   m_Layer: 0
-  m_Name: Collider1
+  m_Name: Collider0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74850,7 +74850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 1
+  screenNumber: 0
   respawnXpos: -15
   respawnYpos: -2
   tracker: {fileID: 474445953}
@@ -81473,7 +81473,7 @@ GameObject:
   - component: {fileID: 1500281389}
   - component: {fileID: 1500281388}
   m_Layer: 0
-  m_Name: Collider12
+  m_Name: Collider13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81506,7 +81506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 12
+  screenNumber: 11
   respawnXpos: 240.5
   respawnYpos: 43.1
   tracker: {fileID: 474445953}
@@ -81567,7 +81567,7 @@ GameObject:
   - component: {fileID: 1523904549}
   - component: {fileID: 1523904548}
   m_Layer: 0
-  m_Name: Collider3
+  m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81600,7 +81600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 3
+  screenNumber: 2
   respawnXpos: 56.5
   respawnYpos: 4
   tracker: {fileID: 474445953}
@@ -85439,7 +85439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -500, y: -225}
+  m_AnchoredPosition: {x: -800, y: -225}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1656342237
@@ -85683,7 +85683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1715731774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85732,6 +85732,12 @@ MonoBehaviour:
   TotalDeathsObject: {fileID: 594075711}
   TotalCollectiblesObject: {fileID: 23237677}
   TotalTimeObject: {fileID: 651833425}
+  FewestDeathsObject: {fileID: 0}
+  MostCollectiblesObject: {fileID: 0}
+  FastestRunObject: {fileID: 0}
+  FastestDeathlessObject: {fileID: 0}
+  FastestAllCollectiblesObject: {fileID: 0}
+  FastestPerfectObject: {fileID: 0}
 --- !u!1 &1723267567
 GameObject:
   m_ObjectHideFlags: 0
@@ -86076,7 +86082,7 @@ GameObject:
   - component: {fileID: 1763002218}
   - component: {fileID: 1763002217}
   m_Layer: 0
-  m_Name: Collider10
+  m_Name: Collider11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86109,7 +86115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 10
+  screenNumber: 9
   respawnXpos: 240.5
   respawnYpos: 43.1
   tracker: {fileID: 474445953}
@@ -86516,7 +86522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -500, y: -425}
+  m_AnchoredPosition: {x: -800, y: -425}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1789918783
@@ -86757,7 +86763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -500, y: -25}
+  m_AnchoredPosition: {x: -800, y: -25}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1890915610
@@ -86772,7 +86778,7 @@ GameObject:
   - component: {fileID: 1890915613}
   - component: {fileID: 1890915612}
   m_Layer: 0
-  m_Name: Collider7
+  m_Name: Collider8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86805,7 +86811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 7
+  screenNumber: 6
   respawnXpos: 165.5
   respawnYpos: 15
   tracker: {fileID: 474445953}
@@ -86866,7 +86872,7 @@ GameObject:
   - component: {fileID: 1898853589}
   - component: {fileID: 1898853588}
   m_Layer: 0
-  m_Name: Collider9
+  m_Name: Collider10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86899,7 +86905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 9
+  screenNumber: 8
   respawnXpos: 225.5
   respawnYpos: 34.1
   tracker: {fileID: 474445953}
@@ -92030,7 +92036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -500, y: 175}
+  m_AnchoredPosition: {x: -800, y: 175}
   m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1952189680
@@ -97547,7 +97553,7 @@ GameObject:
   - component: {fileID: 2056946270}
   - component: {fileID: 2056946269}
   m_Layer: 0
-  m_Name: Collider4
+  m_Name: Collider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97580,7 +97586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 4
+  screenNumber: 3
   respawnXpos: 92
   respawnYpos: 14
   tracker: {fileID: 474445953}
@@ -97641,7 +97647,7 @@ GameObject:
   - component: {fileID: 2081222864}
   - component: {fileID: 2081222865}
   m_Layer: 0
-  m_Name: Collider2
+  m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97719,7 +97725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f139522b416ce44a0c5452b821135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenNumber: 2
+  screenNumber: 1
   respawnXpos: 19.5
   respawnYpos: 1
   tracker: {fileID: 474445953}

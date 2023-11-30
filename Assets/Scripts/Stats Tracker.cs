@@ -13,7 +13,7 @@ public class StatsTracker : MonoBehaviour
     public static int currentDeaths = 0;
     public static int currentCollectibles = 0;
     public static float currentTime = 0;
-    public static float currentProgress = 0;
+    public static int currentProgress = 0;
 
     // the record for each stat
     public static int fewestDeaths;
