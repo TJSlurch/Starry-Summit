@@ -60,10 +60,10 @@ public class PlayerStateManager : MonoBehaviour
     void Update()
     {
         // updating the UpdateState method for the current state's script
-        currentState.UpdateState(this);    
+        currentState.UpdateState(this);
 
         // detecing a space bar input
-        if (Input.GetAxis("Jump") > 0)
+        if(Input.GetKeyDown(SettingsTracker.jumpKey) && (Time.timeScale != 0))
         {
             jumpRequest = true;
             StartCoroutine(ResetJump());
@@ -105,11 +105,17 @@ public class PlayerStateManager : MonoBehaviour
     // accessor methods for the private attributes
     public float getInputX()
     {
-        return Input.GetAxis("Horizontal");
+        if(SettingsTracker.axisKeys == true)
+            return Input.GetAxis("HorizontalWASD");
+        else
+            return Input.GetAxis("HorizontalArrows");
     }
     public float getInputY()
     {
-        return Input.GetAxis("Vertical");
+        if (SettingsTracker.axisKeys == true)
+            return Input.GetAxis("VerticalWASD");
+        else
+            return Input.GetAxis("VerticalArrows");
     }
     public float getSpeed()
     {

@@ -8,6 +8,7 @@ public class PlayerWallJumpState : PlayerBaseState
         Debug.Log("Entering Wall Jump State");
         player.triggerAnimator("JumpTrigger");
         player.playJump();
+        Time.timeScale = SettingsTracker.AerialAidMultiplier;
 
         // increases gravity since it is zero in wall climb
         player.setGravity(8f);
@@ -53,13 +54,13 @@ public class PlayerWallJumpState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // initiates a dash mid wall jump
-        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
+        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
         {
             player.StopAllCoroutines();
             player.SwitchState(player.DashState);
         }
         // initiates wall grab mid wall jump
-        if (player.getTouchingLeft() && Input.GetAxis("Wall Hold") > 0 && player.getX() > 0 || (player.getTouchingRight() && Input.GetAxis("Wall Hold") > 0) && player.getX() > 0)
+        if (player.getTouchingLeft() && Input.GetKey(SettingsTracker.dashKey) && player.getX() > 0 || player.getTouchingRight() && Input.GetKey(SettingsTracker.climbKey) && player.getX() > 0)
         {
             player.StopAllCoroutines();
             player.SwitchState(player.WallGrabState);

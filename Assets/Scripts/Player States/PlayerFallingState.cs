@@ -11,6 +11,7 @@ public class PlayerFallingState : PlayerBaseState
     {
         Debug.Log("Entering Falling State");
         player.triggerAnimator("FallTrigger");
+        Time.timeScale = SettingsTracker.AerialAidMultiplier;
     }
 
     // what happens every frame whilst this state is active
@@ -36,13 +37,13 @@ public class PlayerFallingState : PlayerBaseState
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
-        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
+        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
         {
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
-        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetAxis("Wall Hold") > 0)
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(SettingsTracker.climbKey))
         {
             player.SwitchState(player.WallGrabState);
         }

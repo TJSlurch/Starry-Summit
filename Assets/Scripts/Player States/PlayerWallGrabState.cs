@@ -6,6 +6,7 @@ public class PlayerWallGrabState : PlayerBaseState
     {
         Debug.Log("Entering Wall Grab State");
         player.triggerAnimator("HoldTrigger");
+        Time.timeScale = 1f;
 
         // set gravity to zero to prevent sliding
         player.setGravity(0f);
@@ -14,7 +15,7 @@ public class PlayerWallGrabState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // when shift is released, a new state is entered
-        if(Input.GetAxis("Wall Hold") == 0)
+        if(!Input.GetKey(SettingsTracker.climbKey))
         {
             // choosing which state to enter
             if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
@@ -35,7 +36,7 @@ public class PlayerWallGrabState : PlayerBaseState
         }
 
         // initiates a dash from wall hold
-        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
+        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
         {
             player.SwitchState(player.DashState);
         }
@@ -47,7 +48,7 @@ public class PlayerWallGrabState : PlayerBaseState
         }
 
         // detects if a jump request is active
-        if (Input.GetAxis("Jump") > 0)
+        if (Input.GetKeyDown(SettingsTracker.jumpKey))
         {
             // switches to wall jump state
             player.setJumpRequest(false);

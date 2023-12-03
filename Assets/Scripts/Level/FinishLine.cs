@@ -12,7 +12,7 @@ public class FinishLine : MonoBehaviour
             StatsTracker.fewestDeaths = StatsTracker.currentDeaths;
 
         // checks if the collectibles are a new record
-        if (StatsTracker.currentCollectibles < StatsTracker.mostCollectibles || StatsTracker.mostCollectibles == 0)
+        if (StatsTracker.currentCollectibles > StatsTracker.mostCollectibles || StatsTracker.mostCollectibles == 0)
             StatsTracker.mostCollectibles = StatsTracker.currentCollectibles;
 
         // checks if the time is a new record
@@ -32,6 +32,7 @@ public class FinishLine : MonoBehaviour
         if ((StatsTracker.currentDeaths == 0) && (StatsTracker.currentDeaths == 0) && (StatsTracker.currentTime < StatsTracker.fastestDeathless || StatsTracker.fastestDeathless == 0))
             StatsTracker.fastestPerfect = StatsTracker.currentTime;
 
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }
 }

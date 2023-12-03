@@ -12,6 +12,7 @@ public class PlayerJumpState : PlayerBaseState
         Debug.Log("Entering Jump State");
         player.triggerAnimator("JumpTrigger");
         player.playJump();
+        Time.timeScale = SettingsTracker.AerialAidMultiplier;
 
         player.setJumpRequest(false);
 
@@ -30,13 +31,13 @@ public class PlayerJumpState : PlayerBaseState
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
-        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
+        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
         {
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
-        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetAxis("Wall Hold") > 0)
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(SettingsTracker.climbKey))
         {
             player.SwitchState(player.WallGrabState);
         }
@@ -57,7 +58,7 @@ public class PlayerJumpState : PlayerBaseState
             player.setGravity(weightlessGravity);
         }
         // if space is held, gravity remains constant for a normal jump
-        else if (Input.GetAxis("Jump") > 0)
+        else if (Input.GetKey(SettingsTracker.jumpKey))
         {
             player.setGravity(regularGravity);
         }

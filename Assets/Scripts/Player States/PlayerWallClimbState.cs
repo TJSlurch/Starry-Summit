@@ -9,11 +9,12 @@ public class PlayerWallClimbState : PlayerBaseState
         Debug.Log("Entering Wall Climb State");
         player.triggerAnimator("ClimbTrigger");
         player.playClimb();
+        Time.timeScale = 1f;
     }
     public override void UpdateState(PlayerStateManager player)
     {
         // when shift is released, a new state is entered
-        if (Input.GetAxis("Wall Hold") == 0)
+        if (!Input.GetKey(SettingsTracker.climbKey))
         {
             // choosing which state to enter
             if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
@@ -34,7 +35,7 @@ public class PlayerWallClimbState : PlayerBaseState
         }
 
         // initiates a dash from wall climb
-        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
+        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
         {
             player.SwitchState(player.DashState);
         }
@@ -46,7 +47,7 @@ public class PlayerWallClimbState : PlayerBaseState
         }
 
         // detects if a wall jump request is active, or if top of wall is reached
-        if (Input.GetAxis("Jump") > 0 || (previousClimbDirection == 1 && !player.getTouchingLeft() && !player.getTouchingRight()))
+        if (Input.GetKeyDown(SettingsTracker.jumpKey) || (previousClimbDirection == 1 && !player.getTouchingLeft() && !player.getTouchingRight()))
         {
             // switches to jump state
             player.setJumpRequest(false);

@@ -10,6 +10,7 @@ public class PlayerRunState : PlayerBaseState
         player.triggerAnimator("RunTrigger");
         player.playRun();
         player.setGravity(8f);
+        Time.timeScale = 1f;
     }
 
     // what happens every frame whilst this state is active
@@ -38,13 +39,13 @@ public class PlayerRunState : PlayerBaseState
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
-        if (player.getCanDash() && (Input.GetAxis("Dash") > 0))
+        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
         {
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
-        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetAxis("Wall Hold") > 0)
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(SettingsTracker.climbKey))
         {
             player.SwitchState(player.WallGrabState);
         }

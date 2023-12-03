@@ -16,8 +16,8 @@ public class StatsTracker : MonoBehaviour
     public static int currentProgress = 0;
 
     // the record for each stat
-    public static int fewestDeaths;
-    public static int mostCollectibles;
+    public static int fewestDeaths = 1000;
+    public static int mostCollectibles = -1;
     public static float fastestRun;
 
     // the record for the difficult stats

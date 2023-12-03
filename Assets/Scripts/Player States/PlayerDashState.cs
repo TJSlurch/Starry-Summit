@@ -17,9 +17,9 @@ public class PlayerDashState : PlayerBaseState
 
         // sets gravity to zero and launches player in the direction inputted 
         player.setGravity(0f);
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (player.getInputX() != 0 || player.getInputY() != 0)
         {
-            player.setVelocity(new Vector2(RoundAwayFromZero(Input.GetAxis("Horizontal")), RoundAwayFromZero(Input.GetAxis("Vertical"))).normalized * dashSpeed);
+            player.setVelocity(new Vector2(RoundAwayFromZero(player.getInputX()), RoundAwayFromZero(player.getInputY())).normalized * dashSpeed);
         }
         else
         {
@@ -73,12 +73,12 @@ public class PlayerDashState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if wall grab button is pressed whilst dashing into a wall
-        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetAxis("Wall Hold") > 0)
+        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetKey(SettingsTracker.climbKey))
         {
             player.SwitchState(player.WallGrabState);
         }
         // detects if wall grab button is pressed whilst dashing into a wall
-        if (player.getTouchingRight() && player.getX() > 0 && Input.GetAxis("Wall Hold") > 0)
+        if (player.getTouchingRight() && player.getX() > 0 && Input.GetKey(SettingsTracker.climbKey))
         {
             player.SwitchState(player.WallGrabState);
         }

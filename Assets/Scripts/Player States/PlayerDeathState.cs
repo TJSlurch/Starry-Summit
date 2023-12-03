@@ -11,6 +11,7 @@ public class PlayerDeathState : PlayerBaseState
         player.playDeath();
         player.setVelocity(new Vector2(0, 0));
         player.setGravity(0f);
+        Time.timeScale = 1f;
 
         // increase death stat
         StatsTracker.currentDeaths++;
