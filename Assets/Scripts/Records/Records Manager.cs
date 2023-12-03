@@ -58,7 +58,7 @@ public class RecordsManager : MonoBehaviour
         // update their text
         currentDeathsText.text = "Deaths: " + StatsTracker.currentDeaths.ToString();
         currentCollectiblesText.text = "Stars: " + StatsTracker.currentCollectibles.ToString();
-        currentTimeText.text = "Time: " + TimeSpan.FromSeconds(StatsTracker.currentTime).ToString("hh':'mm':'ss");
+        currentTimeText.text = "Time: " + TimeSpan.FromSeconds(StatsTracker.currentTime).ToString("mm':'ss'.'ff");
         currentProgressText.text = "Progress: " + StatsTracker.currentProgress.ToString() + "%";
         totalDeathsText.text = "Deaths: " + StatsTracker.totalDeaths.ToString();
         totalCollectiblesText.text = "Stars: " + StatsTracker.totalCollectibles.ToString();
@@ -68,12 +68,12 @@ public class RecordsManager : MonoBehaviour
         if (StatsTracker.mostCollectibles != -1)
             MostCollectiblesText.text = "Most Stars: " + StatsTracker.mostCollectibles.ToString();
         if(StatsTracker.fastestRun > 0)
-            FastestRunText.text = "Completion: " + TimeSpan.FromSeconds(StatsTracker.fastestRun).ToString("hh':'mm':'ss");
+            FastestRunText.text = "Completion: " + TimeSpan.FromSeconds(StatsTracker.fastestRun).ToString("mm':'ss'.'ff");
         if (StatsTracker.fastestDeathless > 0)
-            FastestDeathlessText.text = "Deathless: " + TimeSpan.FromSeconds(StatsTracker.fastestDeathless).ToString("hh':'mm':'ss");
+            FastestDeathlessText.text = "Deathless: " + TimeSpan.FromSeconds(StatsTracker.fastestDeathless).ToString("mm':'ss'.'ff");
         if (StatsTracker.fastestAllCollectibles > 0)
-            FastestAllCollectiblesText.text = "All Stars: " + TimeSpan.FromSeconds(StatsTracker.fastestAllCollectibles).ToString("hh':'mm':'ss");
+            FastestAllCollectiblesText.text = "All Stars: " + TimeSpan.FromSeconds(StatsTracker.fastestAllCollectibles).ToString("mm':'ss'.'ff");
         if (StatsTracker.fastestPerfect > 0)
-            FastestPerfectText.text = "Perfect: " + TimeSpan.FromSeconds(StatsTracker.fastestPerfect).ToString("hh':'mm':'ss");
+            FastestPerfectText.text = "Perfect: " + TimeSpan.FromSeconds(StatsTracker.fastestPerfect).ToString("mm':'ss'.'ff");
     }
 }

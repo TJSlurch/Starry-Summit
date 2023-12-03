@@ -5,7 +5,7 @@ using UnityEngine;
 public class TextBoxColliderManager : MonoBehaviour
 {
     [SerializeField] private TextBoxManager textbox;
-    [SerializeField] private string sentence;
+    [SerializeField] public string sentence;
     [SerializeField] private int expression;
 
     private void OnTriggerEnter2D(Collider2D collision)

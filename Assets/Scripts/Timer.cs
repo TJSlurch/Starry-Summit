@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
     {
         StatsTracker.currentTime += Time.deltaTime;
         StatsTracker.totalTime += Time.deltaTime;
-        speedrunTimerText.text = TimeSpan.FromSeconds(StatsTracker.currentTime).ToString("mm':'ss':'ff");
+        speedrunTimerText.text = TimeSpan.FromSeconds(StatsTracker.currentTime).ToString("mm':'ss'.'ff");
 
         // enable/disable timer depending on settings value
         speedrunTimerObject.SetActive(SettingsTracker.timerActive);

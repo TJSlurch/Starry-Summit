@@ -49,6 +49,10 @@ public class SettingsManager : MonoBehaviour
         ActivateArrows.onClick.AddListener(ActivateArrowsPressed);
         ResetOptions.onClick.AddListener(ResetOptionsPressed);
 
+        // update the UI visually
+        timerToggle.isOn = SettingsTracker.timerActive;
+        aerialAidSlider.value = SettingsTracker.AerialAidMultiplier * 4;
+
     }
 
     private void ToggleChanged(bool value)
@@ -121,17 +125,14 @@ public class SettingsManager : MonoBehaviour
                 if (inputType == "Jump")
                 {
                     SettingsTracker.jumpKey = keyCode;
-                    Debug.Log("Jump Key rebound to: " + SettingsTracker.jumpKey);
                 }
                 if (inputType == "Dash")
                 {
                     SettingsTracker.dashKey = keyCode;
-                    Debug.Log("Dash Key rebound to: " + SettingsTracker.dashKey);
                 }
                 if (inputType == "Climb")
                 {
                     SettingsTracker.climbKey = keyCode;
-                    Debug.Log("Climb Key rebound to: " + SettingsTracker.climbKey);
                 }
 
                 NewKeyBackgroundObject.SetActive(false);
@@ -140,5 +141,4 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
-
 }
