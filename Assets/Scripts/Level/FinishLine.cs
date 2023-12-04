@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
-    private int totalCollectibles = 10;
+    private int totalCollectibles = 6;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
