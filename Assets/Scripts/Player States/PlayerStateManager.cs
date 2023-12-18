@@ -6,7 +6,7 @@ public class PlayerStateManager : MonoBehaviour
 {
     // declare variables and declare initial values
     [SerializeField] private float speed = 8f;
-    [SerializeField] private float jumpForce = 12f;
+    [SerializeField] private float jumpForce = 20f;
     [SerializeField] private float climbSpeed = 5f;
     private bool jumpRequest = false;
     private bool canDash = true;
@@ -29,6 +29,7 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] private AudioSource dashAS;
     [SerializeField] private AudioSource climbAS;
     [SerializeField] private AudioSource deathAS;
+    [SerializeField] private AudioSource springAS;
 
     // creating an instance of each state
     private PlayerBaseState currentState;
@@ -68,6 +69,18 @@ public class PlayerStateManager : MonoBehaviour
             jumpRequest = true;
             StartCoroutine(ResetJump());
         }
+
+        if (rb.IsTouchingLayers(LayerMask.GetMask("Spring")))
+        {
+            jumpForce = 35f;
+            springAS.Play();
+            canDash = true;
+            SwitchState(JumpState);
+        }
+        else
+        {
+            jumpForce = 20f;
+        }
     }
 
     // Fixed Update is more reliable for movement related updates
@@ -101,6 +114,7 @@ public class PlayerStateManager : MonoBehaviour
         // sets to the checkpoint position from PlayerLocationTracker
         transform.position = new Vector2(tracker.getRespawnX(), tracker.getRespawnY());
     }
+
 
     // accessor methods for the private attributes
     public float getInputX()
@@ -155,7 +169,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public bool getTouchingDown()
     {
-        return rbDown.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        return rbDown.IsTouchingLayers(LayerMask.GetMask("Ground")) || rbDown.IsTouchingLayers(LayerMask.GetMask("Platform"));
     }
     public bool getTouchingSpikes()
     {
@@ -191,7 +205,11 @@ public class PlayerStateManager : MonoBehaviour
     {
         animator.SetBool("Crouched?", value);
     }
-
+    public void setPosition(float x, float y)
+    {
+        transform.position = new Vector2(x, y);
+    }
+    
     // public methods to play sound effects
     public void playRun()
     {

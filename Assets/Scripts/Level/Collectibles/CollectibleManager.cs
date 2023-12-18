@@ -40,14 +40,11 @@ public class CollectibleManager : MonoBehaviour
         }
         StatsTracker.totalCollectibles = totalCollectibles;
 
-
-
-
         // show UI for 3 seconds total before hiding it again
         counter.SetActive(true);
         // pause momentarily before updating the UI to show the increase
         yield return new WaitForSeconds(0.5f);
-        counterNumber.text = StatsTracker.currentCollectibles.ToString();
+        counterNumber.text = StatsTracker.currentCollectibles.ToString() + " / 10 ";
         yield return new WaitForSeconds(2.5f);
         counter.SetActive(false);
     }

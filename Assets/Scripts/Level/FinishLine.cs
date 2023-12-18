@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
-    private int totalCollectibles = 6;
+    [SerializeField] GameObject background;
+    [SerializeField] GameObject congratulations;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,14 +26,16 @@ public class FinishLine : MonoBehaviour
             StatsTracker.fastestDeathless = StatsTracker.currentTime;
 
         // checks if all collectibles were collected and a new record
-        if ((StatsTracker.currentCollectibles == totalCollectibles) && (StatsTracker.currentTime < StatsTracker.fastestDeathless || StatsTracker.fastestDeathless == 0))
-            StatsTracker.fastestDeathless = StatsTracker.currentTime;
+        if ((StatsTracker.currentCollectibles == 10) && (StatsTracker.currentTime < StatsTracker.fastestAllCollectibles || StatsTracker.fastestAllCollectibles == 0))
+            StatsTracker.fastestAllCollectibles = StatsTracker.currentTime;
 
         // checks if all collectibles were collected and deathless and a new record
-        if ((StatsTracker.currentDeaths == 0) && (StatsTracker.currentDeaths == 0) && (StatsTracker.currentTime < StatsTracker.fastestDeathless || StatsTracker.fastestDeathless == 0))
+        if ((StatsTracker.currentDeaths == 0) && (StatsTracker.currentCollectibles == 10) && (StatsTracker.currentTime < StatsTracker.fastestPerfect || StatsTracker.fastestPerfect == 0))
             StatsTracker.fastestPerfect = StatsTracker.currentTime;
 
         Time.timeScale = 1f;
+        background.SetActive(true);
+        congratulations.SetActive(true);
         SceneManager.LoadScene("Menu");
     }
 }

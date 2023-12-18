@@ -57,16 +57,16 @@ public class RecordsManager : MonoBehaviour
     {
         // update their text
         currentDeathsText.text = "Deaths: " + StatsTracker.currentDeaths.ToString();
-        currentCollectiblesText.text = "Stars: " + StatsTracker.currentCollectibles.ToString();
+        currentCollectiblesText.text = "Stars: " + StatsTracker.currentCollectibles.ToString() + " / 10 ";
         currentTimeText.text = "Time: " + TimeSpan.FromSeconds(StatsTracker.currentTime).ToString("mm':'ss'.'ff");
         currentProgressText.text = "Progress: " + StatsTracker.currentProgress.ToString() + "%";
         totalDeathsText.text = "Deaths: " + StatsTracker.totalDeaths.ToString();
-        totalCollectiblesText.text = "Stars: " + StatsTracker.totalCollectibles.ToString();
+        totalCollectiblesText.text = "Stars: " + StatsTracker.totalCollectibles.ToString() + " / 10 ";
         totalTimeText.text = "Time: " + TimeSpan.FromSeconds(StatsTracker.totalTime).ToString("hh':'mm':'ss");
         if (StatsTracker.fewestDeaths != 1000)
             FewestDeathsText.text = "Fewest Deaths: " + StatsTracker.fewestDeaths.ToString();
         if (StatsTracker.mostCollectibles != -1)
-            MostCollectiblesText.text = "Most Stars: " + StatsTracker.mostCollectibles.ToString();
+            MostCollectiblesText.text = "Most Stars: " + StatsTracker.mostCollectibles.ToString() + " / 10 ";
         if(StatsTracker.fastestRun > 0)
             FastestRunText.text = "Completion: " + TimeSpan.FromSeconds(StatsTracker.fastestRun).ToString("mm':'ss'.'ff");
         if (StatsTracker.fastestDeathless > 0)
