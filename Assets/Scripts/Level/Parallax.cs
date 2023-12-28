@@ -11,7 +11,7 @@ public class Parallax : MonoBehaviour
     void Start()
     {
         // length is divided by three because it is triple tiled
-        length = (GetComponent<SpriteRenderer>().bounds.size.x) / 5;
+        length = (GetComponent<SpriteRenderer>().bounds.size.x) / 7;
     }
 
     // The object is moved slighyly once per frame
@@ -29,7 +29,5 @@ public class Parallax : MonoBehaviour
             // sets the position to the original location
             transform.position = new Vector2(startPosition, transform.position.y);
         }
-
-        
     }
 }

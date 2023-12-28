@@ -13,7 +13,7 @@ public class PlayerLocationTracker : MonoBehaviour
     private bool newScreenRequest = true;
 
     // number of screens (to be set when level is finalised)
-    private int numOfScreens = 15;
+    private int numOfScreens = 18;
 
     private void Update()
     {

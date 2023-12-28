@@ -46,7 +46,7 @@ public class PlayerDashState : PlayerBaseState
         }
 
         // detects if touching ground with input
-        if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
+        if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown() && !player.getTouchingSpikes())
         {
             // switches player to run state
             player.SwitchState(player.RunState);
@@ -54,7 +54,7 @@ public class PlayerDashState : PlayerBaseState
             yield return new WaitForSeconds(0.25f);
             player.setCanDash(true);
         }
-        else if(player.getTouchingDown())
+        else if(player.getTouchingDown() && !player.getTouchingSpikes())
         {
             // switches to idle state
             player.SwitchState(player.IdleState);
@@ -62,7 +62,7 @@ public class PlayerDashState : PlayerBaseState
             yield return new WaitForSeconds(0.25f);
             player.setCanDash(true);
         }
-        else
+        else if(!player.getTouchingSpikes())
         {
             // switches player to falling state
             player.SwitchState(player.FallingState);

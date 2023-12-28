@@ -13,7 +13,9 @@ public class KeybindUpdater : MonoBehaviour
     [SerializeField] private GameObject DashControlObject;
     [SerializeField] private GameObject TextboxRunObject;
     [SerializeField] private GameObject TextboxJumpObject;
+    [SerializeField] private GameObject TextboxHoldJumpObject;
     [SerializeField] private GameObject TextboxClimbObject;
+    [SerializeField] private GameObject TextboxWallJumpObject;
     [SerializeField] private GameObject TextboxDashObject;
 
     TextMeshProUGUI RunControlText;
@@ -23,7 +25,9 @@ public class KeybindUpdater : MonoBehaviour
     TextMeshProUGUI DashControlText;
     TextBoxColliderManager TextboxRunText;
     TextBoxColliderManager TextboxJumpText;
+    TextBoxColliderManager TextboxHoldJumpText;
     TextBoxColliderManager TextboxClimbText;
+    TextBoxColliderManager TextboxWallJumpText;
     TextBoxColliderManager TextboxDashText;
 
     // true = main menu, false = gameplay menu
@@ -38,14 +42,15 @@ public class KeybindUpdater : MonoBehaviour
         DashControlText = DashControlObject.GetComponent<TextMeshProUGUI>();
         TextboxRunText = TextboxRunObject.GetComponent<TextBoxColliderManager>();
         TextboxJumpText = TextboxJumpObject.GetComponent<TextBoxColliderManager>();
+        TextboxHoldJumpText = TextboxHoldJumpObject.GetComponent<TextBoxColliderManager>();
         TextboxClimbText = TextboxClimbObject.GetComponent<TextBoxColliderManager>();
+        TextboxWallJumpText = TextboxWallJumpObject.GetComponent<TextBoxColliderManager>();
         TextboxDashText = TextboxDashObject.GetComponent<TextBoxColliderManager>();
 
         if (SettingsTracker.axisKeys == true && !onMainMenu)
             TextboxRunText.sentence = "Press A to move left                        Press D to move right";
         if(SettingsTracker.axisKeys == false && !onMainMenu)
             TextboxRunText.sentence = "Press Left Arrow for left                     Press Right Arrow for right";
-               
     }
 
     // Update is called once per frame
@@ -78,7 +83,9 @@ public class KeybindUpdater : MonoBehaviour
         if (!onMainMenu)
         {
             TextboxJumpText.sentence = "Press " + SettingsTracker.jumpKey.ToString() + " to jump";
-            TextboxDashText.sentence = "Press " + SettingsTracker.dashKey.ToString() + " whilst moving to dash!";
+            TextboxHoldJumpText.sentence = "Hold " + SettingsTracker.jumpKey.ToString() + " to jump higher";
+            TextboxWallJumpText.sentence = "Press " + SettingsTracker.jumpKey.ToString() + " whilst climbing to wall jump";
+            TextboxDashText.sentence = "Press " + SettingsTracker.dashKey.ToString() + " and a direction to dash! This ability refreshes when grounded";
         }
     }
 }
