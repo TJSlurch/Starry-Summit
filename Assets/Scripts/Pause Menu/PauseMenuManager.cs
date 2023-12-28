@@ -35,7 +35,7 @@ public class PauseMenuManager : MonoBehaviour
     private void Update()
     {
         // pressing escape pauses/unpauses the game
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             changePaused();
         }

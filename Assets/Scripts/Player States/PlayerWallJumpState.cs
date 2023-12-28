@@ -54,13 +54,13 @@ public class PlayerWallJumpState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // initiates a dash mid wall jump
-        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
+        if (player.getCanDash() && (Input.GetKey(SettingsTracker.dashKey) || Input.GetKey(KeyCode.JoystickButton2)))
         {
             player.StopAllCoroutines();
             player.SwitchState(player.DashState);
         }
         // initiates wall grab mid wall jump
-        if (player.getTouchingLeft() && Input.GetKey(SettingsTracker.dashKey) && player.getX() > 0 || player.getTouchingRight() && Input.GetKey(SettingsTracker.climbKey) && player.getX() > 0)
+        if (player.getTouchingLeft() && (Input.GetKey(SettingsTracker.dashKey) || Input.GetKey(KeyCode.JoystickButton2)) && player.getX() > 0 || player.getTouchingRight() && (Input.GetKey(SettingsTracker.climbKey) || Input.GetAxis("ControllerClimb") != 0) && player.getX() > 0)
         {
             player.StopAllCoroutines();
             player.SwitchState(player.WallGrabState);

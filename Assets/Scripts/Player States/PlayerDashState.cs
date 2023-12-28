@@ -73,12 +73,12 @@ public class PlayerDashState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // detects if wall grab button is pressed whilst dashing into a wall
-        if (player.getTouchingLeft() && player.getX() < 0 && Input.GetKey(SettingsTracker.climbKey))
+        if (player.getTouchingLeft() && player.getX() < 0 && (Input.GetKey(SettingsTracker.climbKey) || Input.GetAxis("ControllerClimb") != 0))
         {
             player.SwitchState(player.WallGrabState);
         }
         // detects if wall grab button is pressed whilst dashing into a wall
-        if (player.getTouchingRight() && player.getX() > 0 && Input.GetKey(SettingsTracker.climbKey))
+        if (player.getTouchingRight() && player.getX() > 0 && (Input.GetKey(SettingsTracker.climbKey) || Input.GetAxis("ControllerClimb") != 0))
         {
             player.SwitchState(player.WallGrabState);
         }

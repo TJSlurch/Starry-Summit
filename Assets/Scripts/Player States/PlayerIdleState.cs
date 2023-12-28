@@ -41,13 +41,13 @@ public class PlayerIdleState : PlayerBaseState
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
-        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
+        if (player.getCanDash() && (Input.GetKey(SettingsTracker.dashKey) || Input.GetKey(KeyCode.JoystickButton2)))
         {
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
-        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(SettingsTracker.climbKey))
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && (Input.GetKey(SettingsTracker.climbKey) || Input.GetAxis("ControllerClimb") != 0))
         {
             player.SwitchState(player.WallGrabState);
         }

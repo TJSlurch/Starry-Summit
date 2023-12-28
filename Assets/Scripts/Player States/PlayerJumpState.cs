@@ -31,13 +31,13 @@ public class PlayerJumpState : PlayerBaseState
         }
 
         // initiates a dash if arrow keys are pressed whilst a dash is possible
-        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
+        if (player.getCanDash() && (Input.GetKey(SettingsTracker.dashKey) || Input.GetKey(KeyCode.JoystickButton2)))
         {
             player.SwitchState(player.DashState);
         }
 
         // detects if wall grab button is pressed whilst next to a wall
-        if ((player.getTouchingLeft() || player.getTouchingRight()) && Input.GetKey(SettingsTracker.climbKey))
+        if ((player.getTouchingLeft() || player.getTouchingRight()) && (Input.GetKey(SettingsTracker.climbKey) || Input.GetAxis("ControllerClimb") !=0))
         {
             player.SwitchState(player.WallGrabState);
         }
@@ -58,7 +58,7 @@ public class PlayerJumpState : PlayerBaseState
             player.setGravity(weightlessGravity);
         }
         // if space is held, gravity remains constant for a normal jump
-        else if (Input.GetKey(SettingsTracker.jumpKey))
+        else if (Input.GetKey(SettingsTracker.jumpKey) || Input.GetKey(KeyCode.JoystickButton0))
         {
             player.setGravity(regularGravity);
         }

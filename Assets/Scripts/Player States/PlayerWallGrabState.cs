@@ -15,7 +15,7 @@ public class PlayerWallGrabState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // when shift is released, a new state is entered
-        if(!Input.GetKey(SettingsTracker.climbKey))
+        if(!Input.GetKey(SettingsTracker.climbKey) && Input.GetAxis("ControllerClimb") == 0)
         {
             // choosing which state to enter
             if (Mathf.Abs(player.getInputX()) > Mathf.Epsilon && player.getTouchingDown())
@@ -36,7 +36,7 @@ public class PlayerWallGrabState : PlayerBaseState
         }
 
         // initiates a dash from wall hold
-        if (player.getCanDash() && Input.GetKey(SettingsTracker.dashKey))
+        if (player.getCanDash() && (Input.GetKey(SettingsTracker.dashKey) || Input.GetKey(KeyCode.JoystickButton2)))
         {
             player.SwitchState(player.DashState);
         }
@@ -48,7 +48,7 @@ public class PlayerWallGrabState : PlayerBaseState
         }
 
         // detects if a jump request is active
-        if (Input.GetKeyDown(SettingsTracker.jumpKey))
+        if (Input.GetKeyDown(SettingsTracker.jumpKey) || Input.GetKeyDown(KeyCode.JoystickButton0))
         {
             // switches to wall jump state
             player.setJumpRequest(false);
