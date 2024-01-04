@@ -60,11 +60,6 @@ public class PlayerStateManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Input.GetAxis("HorizontalWASD"));
-
-
-
-
         // updating the UpdateState method for the current state's script
         currentState.UpdateState(this);
 
