@@ -56,6 +56,9 @@ public class KeybindUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Input.GetJoystickNames());
+
+
         if(SettingsTracker.axisKeys == true)
         {
             RunControlText.text = "A / D";
