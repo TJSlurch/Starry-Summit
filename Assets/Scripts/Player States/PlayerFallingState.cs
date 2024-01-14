@@ -9,7 +9,6 @@ public class PlayerFallingState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Falling State");
         player.triggerAnimator("FallTrigger");
         Time.timeScale = SettingsTracker.AerialAidMultiplier;
     }

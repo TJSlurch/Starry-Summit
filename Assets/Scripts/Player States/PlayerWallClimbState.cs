@@ -6,7 +6,6 @@ public class PlayerWallClimbState : PlayerBaseState
 
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Wall Climb State");
         player.triggerAnimator("ClimbTrigger");
         player.playClimb();
         Time.timeScale = 1f;

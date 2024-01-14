@@ -4,7 +4,6 @@ public class PlayerWallGrabState : PlayerBaseState
 {
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Wall Grab State");
         player.triggerAnimator("HoldTrigger");
         Time.timeScale = 1f;
 

@@ -6,7 +6,6 @@ public class PlayerDeathState : PlayerBaseState
     // What happens when a death is triggered
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Death State");
         player.triggerAnimator("DeathTrigger");
         player.playDeath();
         player.setVelocity(new Vector2(0, 0));

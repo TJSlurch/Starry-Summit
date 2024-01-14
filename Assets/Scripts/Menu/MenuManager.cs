@@ -41,7 +41,12 @@ public class MenuManager : MonoBehaviour
                 loading.SetActive(true);
                 // start gameplay
                 SceneManager.LoadScene("Gameplay");
-           
+                break;
+            case "return":
+                // enable loading UI
+                loading.SetActive(true);
+                // return to main menu
+                SceneManager.LoadScene("Menu");
                 break;
             default:
                 Debug.Log("Switch Error");

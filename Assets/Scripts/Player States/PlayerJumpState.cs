@@ -9,7 +9,6 @@ public class PlayerJumpState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Jump State");
         player.triggerAnimator("JumpTrigger");
         player.playJump();
         Time.timeScale = SettingsTracker.AerialAidMultiplier;

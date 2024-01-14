@@ -1,13 +1,12 @@
 using System.Collections;
-using System;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
     // declare variables and declare initial values
-    [SerializeField] private float speed = 8f;
-    [SerializeField] private float jumpForce = 20f;
-    [SerializeField] private float climbSpeed = 5f;
+    private float speed = 10f;
+    private float jumpForce = 20f;
+    private float climbSpeed = 8f;
     private bool jumpRequest = false;
     private bool canDash = true;
 
@@ -70,17 +69,8 @@ public class PlayerStateManager : MonoBehaviour
             StartCoroutine(ResetJump());
         }
 
-        if (rb.IsTouchingLayers(LayerMask.GetMask("Spring")))
-        {
-            jumpForce = 35f;
-            springAS.Play();
-            canDash = true;
-            SwitchState(JumpState);
-        }
-        else
-        {
-            jumpForce = 20f;
-        }
+        // constantly check if a spring is collided with
+        checkForSpring();
     }
 
     // Fixed Update is more reliable for movement related updates
@@ -115,6 +105,22 @@ public class PlayerStateManager : MonoBehaviour
         transform.position = new Vector2(tracker.getRespawnX(), tracker.getRespawnY());
     }
 
+    // called every frame from FixedUpdate (), to detect a spring collision
+    private void checkForSpring()
+    {
+        if (rb.IsTouchingLayers(LayerMask.GetMask("Spring")))
+        {
+            // increase jumpforce and switch to jump state.
+            jumpForce = 35f;
+            springAS.Play();
+            canDash = true;
+            SwitchState(JumpState);
+        }
+        else
+        {
+            jumpForce = 20f;
+        }
+    }
 
     // accessor methods for the private attributes
     public float getInputX()

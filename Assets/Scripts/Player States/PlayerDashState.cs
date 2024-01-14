@@ -9,7 +9,6 @@ public class PlayerDashState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Dash State");
         player.triggerAnimator("DashTrigger");
         player.playDash();
 

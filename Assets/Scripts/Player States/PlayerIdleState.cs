@@ -6,7 +6,6 @@ public class PlayerIdleState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Idle State");
         player.triggerAnimator("IdleTrigger");
         player.setGravity(8f);
         Time.timeScale = 1f;

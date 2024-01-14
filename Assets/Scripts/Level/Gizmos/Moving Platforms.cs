@@ -21,13 +21,18 @@ public class MovingPlatforms : MonoBehaviour
             moveTowards(new Vector2(transform.position.x, maxCoordinate));
         if (!direction && !axisOfMovement) // if moving to minimum on y axis
             moveTowards(new Vector2(transform.position.x, minCoordinate));
+
+        flipDirection();
     }
 
     private void moveTowards(Vector2 targetPosition)
     {
         // moves towards target at the set speed
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed);
+    }
 
+    private void flipDirection()
+    {
         // Checks if the platform has reached a limit position
         if (axisOfMovement && transform.position.x == maxCoordinate)
             direction = !direction; // Change direction

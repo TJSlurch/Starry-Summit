@@ -36,6 +36,6 @@ public class FinishLine : MonoBehaviour
         Time.timeScale = 1f;
         background.SetActive(true);
         congratulations.SetActive(true);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("End Screen");
     }
 }

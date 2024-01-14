@@ -6,7 +6,6 @@ public class PlayerRunState : PlayerBaseState
     // what happens when this state is switched to
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Run State");
         player.triggerAnimator("RunTrigger");
         player.playRun();
         player.setGravity(8f);

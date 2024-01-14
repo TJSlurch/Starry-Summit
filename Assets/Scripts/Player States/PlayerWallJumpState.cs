@@ -5,7 +5,6 @@ public class PlayerWallJumpState : PlayerBaseState
 {
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Wall Jump State");
         player.triggerAnimator("JumpTrigger");
         player.playJump();
         Time.timeScale = SettingsTracker.AerialAidMultiplier;
